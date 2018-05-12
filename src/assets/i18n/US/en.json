@@ -20,10 +20,6 @@
     "menu": {
       "dashboard": "Dashboard",
       "curriculos": "Currículos",
-<<<<<<< HEAD
-      "csbff": "C. S. B. F. F.",
-=======
->>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
       "editors": "Editors",
       "ck_editor": "CKEditor",
       "components": "Components",

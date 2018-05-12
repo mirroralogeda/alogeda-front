@@ -21,10 +21,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
       { path: 'curriculos',  loadChildren: './curriculos/curriculos.module#CurriculosModule'},
-<<<<<<< HEAD
-      { path: 'csbff',  loadChildren: './csbff/csbff.module#CsbffModule'},
-=======
->>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
       { path: 'editors', loadChildren: './editors/editors.module#EditorsModule' },
       { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
       { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },

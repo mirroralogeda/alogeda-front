@@ -27,21 +27,6 @@ export const PAGES_MENU = [
         }
       },
       {
-<<<<<<< HEAD
-        path: 'csbff',
-        data: {
-          menu: {
-            title: 'general.menu.csbff',
-            icon: 'ion-document',
-            selected: false,
-            expanded: false,
-            order: 0
-          }
-        }
-      },
-      {
-=======
->>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
         path: 'editors',
         data: {
           menu: {

@@ -1,29 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-<<<<<<< HEAD
-import { SmartTablesService } from '../tables/components/smartTables/smartTables.service';
+
 
 import { LocalDataSource } from 'ng2-smart-table';
-=======
-
->>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
 
 
 @Component({
   selector: 'app-curriculos',
   templateUrl: './curriculos.component.html',
-<<<<<<< HEAD
   styleUrls: ['./curriculos.component.scss'],
-=======
-  styleUrls: ['./curriculos.component.scss']
->>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
 })
 export class CurriculosComponent implements OnInit {
 
 
   btnSelected = 'btn btn-warning';
   btnDefault = 'btn btn-default';
-<<<<<<< HEAD
   btnOk = 'btn btn-success';
   cb1 = this.btnDefault;
   cb2 = this.btnDefault;
@@ -192,20 +183,11 @@ export class CurriculosComponent implements OnInit {
     }
   }
 
-  constructor(private activeModal: NgbModal, protected service: SmartTablesService) {
+  constructor(private activeModal: NgbModal) {
     // this.service.getData().then((data) => {
     //   this.source.load(data);
     // });
     this.selectFase(1);
-=======
-
-  selectFase(f) {
-    console.log(f);
-
-  }
-
-  constructor(private activeModal: NgbModal) {
->>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
 
   }
 
