@@ -1,0 +1,117 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-12">
+      <ba-card cardTitle="Desenvolvedor Jr." class="modal-buttons">
+        <button [class]="cb1" (click)="selectFase(1)">Dados pessoais</button>
+        <button [class]="cb2" (click)="selectFase(2)">Escolaridade</button>
+        <button [class]="cb3" (click)="selectFase(3)">Habilidades</button>
+        <button [class]="cb4" (click)="selectFase(4)">Experiências</button>
+        <button [class]="cb5" (click)="selectFase(5)">Conclusão</button>
+      </ba-card>
+    </div>
+  </div>
+</div>
+
+
+<div class="widgets">
+  <div class="row">
+
+    <!-- Dados pessoais -->
+    <div class="col-md-12" *ngIf="show1">
+
+      <ba-card cardTitle="Dados pessoais" baCardClass="with-scroll">
+        <form>
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label for="input01">CPF</label>
+              <input type="text" class="form-control" id="g1-" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="input01">RG</label>
+              <input type="text" class="form-control" id="g1-" placeholder="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="input01">Nome</label>
+              <input type="text" class="form-control" id="g1-" placeholder="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="input01">E-mail</label>
+              <input type="text" class="form-control" id="g1-" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="input01">Telefone</label>
+              <input type="text" class="form-control" id="g1-" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="input01">CEP</label>
+              <input type="text" class="form-control" id="g1-" placeholder="00000-000">
+              <span class="help-block sub-little-text">Cidade - UF</span>
+            </div>
+          </div>
+          <button class="{{ btnSelected }} pull-right" (click)="selectFase(2, true)">Guardar e prosseguir</button>
+        </form>
+      </ba-card>
+
+    </div>
+
+    <!-- Escolaridade -->
+    <div *ngIf="show2">
+      <div class="col-md-12">
+        <ba-card cardTitle="Escolaridade" baCardClass="with-scroll" class="smart-table-container">
+          <ng2-smart-table [settings]="settings2" [source]="source2" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+          <button class="{{ btnSelected }} pull-right" (click)="selectFase(3, true)" style="margin-top: 10px">Guardar e prosseguir</button>
+        </ba-card>
+      </div>
+    </div>
+
+    <!-- Habilidadeas -->
+    <div class="col-md-12" *ngIf="show3">
+
+      <ba-card cardTitle="Habilidades" baCardClass="with-scroll">
+        <form>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <ng2-smart-table [settings]="settings3" [source]="source3" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+            </div>
+          </div>
+          <button class="{{ btnSelected }} pull-right" (click)="selectFase(4, true)">Guardar e prosseguir</button>
+        </form>
+      </ba-card>
+    </div>
+
+    <!-- experiencias -->
+    <div *ngIf="show4">
+      <div class="col-md-12">
+        <ba-card cardTitle="Experiências" baCardClass="with-scroll" class="smart-table-container">
+          <ng2-smart-table [settings]="settings4" [source]="source4" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+          <button class="{{ btnSelected }} pull-right" (click)="selectFase(5, true)" style="margin-top: 10px">Guardar e prosseguir</button>
+        </ba-card>
+      </div>
+    </div>
+
+    <!-- conclusão -->
+    <div class="col-md-12" *ngIf="show5">
+
+      <ba-card cardTitle="Conclusão" baCardClass="with-scroll">
+        <form>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="input01">Informações adicionais (opcional)</label>
+              <textarea placeholder="Default Input" class="form-control" id="textarea01"></textarea>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="input01">Anexar arquivo .pdf (opcional)</label>
+              <ba-file-uploader [fileUploaderOptions]="fileUploaderOptions"></ba-file-uploader>
+            </div>
+          </div>
+          <button class="{{ btnSelected }} pull-right" (click)="selectFase(5, true)">Guardar e prosseguir</button>
+        </form>
+      </ba-card>
+
+    </div>
+
+
+  </div>
+</div>
