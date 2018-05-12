@@ -27,6 +27,7 @@ export const PAGES_MENU = [
         }
       },
       {
+<<<<<<< HEAD
         path: 'csbff',
         data: {
           menu: {
@@ -39,6 +40,8 @@ export const PAGES_MENU = [
         }
       },
       {
+=======
+>>>>>>> df2951611e8aafd13ae5ea330febc3b051903195
         path: 'editors',
         data: {
           menu: {
