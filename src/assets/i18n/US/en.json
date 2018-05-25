@@ -18,6 +18,9 @@
       "option1": "Option 1"
     },
     "menu": {
+      "cadastros": "Cadastros",
+      "cargos": "Cargos",
+      "setores": "Setores",
       "dashboard": "Dashboard",
       "curriculos": "Currículos",
       "editors": "Editors",

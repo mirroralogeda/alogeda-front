@@ -27,6 +27,28 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'cadastros',
+        data: {
+          menu: {
+            title: 'general.menu.cadastros',
+            icon: 'ion-edit',
+            selected: false,
+            expanded: false,
+            order: 100,
+          }
+        },
+        children: [
+          {
+            path: 'setores',
+            data: {
+              menu: {
+                title: 'general.menu.setores',
+              }
+            }
+          }
+        ]
+      },
+      {
         path: 'editors',
         data: {
           menu: {
