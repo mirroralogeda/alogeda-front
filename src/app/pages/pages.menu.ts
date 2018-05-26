@@ -45,6 +45,14 @@ export const PAGES_MENU = [
                 title: 'general.menu.setores',
               }
             }
+          },
+          {
+            path: 'cargos',
+            data: {
+              menu: {
+                title: 'general.menu.cargos',
+              }
+            }
           }
         ]
       },

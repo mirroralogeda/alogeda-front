@@ -1,36 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SetoresService } from "./setores.service";
-import { Resposta } from "./resposta.model";
-import { Setores } from "./setores.model";
+// import { CargosService } from "./cargos.service";
+import { Cargos } from "./cargos.model";
 
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'setores',
-  templateUrl: './setores.component.html',
-  styleUrls: ['./setores.component.scss'],
-  providers: [SetoresService]
+  selector: 'cargos',
+  templateUrl: './cargos.component.html',
+  styleUrls: ['./cargos.component.scss'],
 })
-export class SetoresComponent implements OnInit {
-
-  resposta: Resposta;
-
-  constructor(private activeModal: NgbModal, private setoresService: SetoresService) {}
-
+export class CargosComponent implements OnInit {
+  cargos;
   ngOnInit() {
-    this.setoresService.getAllSetores()
-      .subscribe( (dados) => {
-        this.resposta = dados;
-        this.sourceTable.load(this.setoresService.getDataTable(dados));
-
-      });
-
+    // this.cargosService.getAllCargos()
+    //   .subscribe(
+    //     data => this.cargos = data
+    //   )
 
   }
 
+  constructor(private activeModal: NgbModal) {
 
+
+
+  }
 
 
   settingsTable = {
@@ -50,7 +45,7 @@ export class SetoresComponent implements OnInit {
     },
     columns: {
       nome: {
-        title: 'Nome do setor',
+        title: 'Nome do Cargo',
         type: 'string'
       }
     }
