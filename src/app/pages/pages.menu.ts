@@ -45,6 +45,14 @@ export const PAGES_MENU = [
                 title: 'general.menu.setores',
               }
             }
+          },
+          {
+            path: 'tab-irrf',
+            data: {
+              menu: {
+                title: 'general.menu.tab_irrf',
+              }
+            }
           }
         ]
       },
