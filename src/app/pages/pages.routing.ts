@@ -28,6 +28,7 @@ export const routes: Routes = [
       { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
       { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
       { path: 'maps', loadChildren: './maps/maps.module#MapsModule' },
+      { path: 'cadastros/cidades', loadChildren: './cidades/cidades.module#CidadesModule' },
       { path: 'cadastros/setores', loadChildren: './setores/setores.module#SetoresModule' },
       { path: 'cadastros/cargos', loadChildren: './cargos/cargos.module#CargosModule' },
       { path: 'cadastros/tab-irrf', loadChildren: './tab-irrf/tab-irrf.module#Tab_irrfModule' }
