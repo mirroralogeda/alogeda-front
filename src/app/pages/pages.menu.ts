@@ -61,7 +61,23 @@ export const PAGES_MENU = [
                 title: 'general.menu.tab_irrf',
               }
             }
-          }
+          },
+          {
+            path: 'dependentes',
+            data: {
+              menu: {
+                title: 'general.menu.dependentes',
+              }
+            }
+          },
+          {
+            path: 'Atestados',
+            data: {
+              menu: {
+                title: 'general.menu.atestados',
+              }
+            }
+          },
         ]
       },
       {
