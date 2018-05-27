@@ -39,6 +39,14 @@ export const PAGES_MENU = [
         },
         children: [
           {
+            path: 'cidades',
+            data: {
+              menu: {
+                title: 'general.menu.cidades',
+              }
+            }
+          },
+          {
             path: 'setores',
             data: {
               menu: {
