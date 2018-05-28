@@ -70,6 +70,14 @@ export const PAGES_MENU = [
               }
             }
           },
+{
+            path: 'tab-sal-familia',
+            data: {
+              menu: {
+                title: 'general.menu.tab_salario_familia',
+              }
+			}
+            },
           {
             path: 'dependentes',
             data: {
