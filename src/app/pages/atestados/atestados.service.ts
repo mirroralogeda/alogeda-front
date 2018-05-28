@@ -12,7 +12,7 @@ import { Resposta } from './resposta.model';
 
 @Injectable()
 export class AtestadosService {
-  url = "http://localhost:8080/api/atestados/getall"
+  url = "http://localhost:3000/atestados.json"
 
   constructor(private http: Http) {
 

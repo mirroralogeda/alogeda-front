@@ -79,7 +79,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'Atestados',
+            path: 'atestados',
             data: {
               menu: {
                 title: 'general.menu.atestados',
