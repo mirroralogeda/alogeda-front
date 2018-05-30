@@ -3,7 +3,7 @@ import axios from "axios";
 
 @Injectable()
 export class HostService {
-  host: string = "localhost:8080";
+  host: string = "http://localhost:8080/api/";
   cabecalho: object = { jwt: window.localStorage.getItem("jwt") };
   constructor() {}
   public defaultGet(url: string, parametros: any, callback: Function) {
@@ -21,8 +21,9 @@ export class HostService {
       });
   }
   public defaultPost(url: string, data: any, callback: Function) {
+    console.log(this.host + url);
     axios
-      .post(url, data, {
+      .post(this.host + url, data, {
         headers: this.cabecalho
       })
       .then(resposta => {
