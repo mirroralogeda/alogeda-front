@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -9,20 +9,17 @@ import { Observable } from 'rxjs/Rx';
 
 import { Atestados } from './atestados.model';
 import { Resposta } from './resposta.model';
-
+import { HostService } from '../../host.service'
 @Injectable()
 export class AtestadosService {
-  url = "http://localhost:3000/atestados.json"
+  url = "http://localhost:8080/api/atestados/getall"
 
-  constructor(private http: Http) {
+  constructor(public hostService: HostService) {
 
   }
 
-  getAllAtestados() {
-    return this.http.get(this.url).map(res => {
-      console.log(res.json());
-      return res.json();
-    });
+  getAllAtestados(id:number,callback: Function) {
+    this.hostService.defaultGet("atestados/getall", {funcionario:id}, callback);
   }
 
   getDataTable(data) {

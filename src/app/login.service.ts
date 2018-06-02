@@ -50,13 +50,13 @@ export class LoginService {
     this.verificaLogin();
   }
   alteracaoDeRota() {
-    this.router.events.subscribe(val => {
-      console.log("Alterou o caminho", val);
-      if (val["urlAfterRedirects"] !== "/login" || val["url"] !== "/login")
-        this.verificaLogin();
-      else {
-        console.log("não foi");
-      }
-    });
+    // this.router.events.subscribe(val => {
+    //   console.log("Alterou o caminho", val);
+    //   if (val["urlAfterRedirects"] !== "/login" || val["url"] !== "/login")
+    //     this.verificaLogin();
+    //   else {
+    //     console.log("não foi");
+    //   }
+    // });
   }
 }

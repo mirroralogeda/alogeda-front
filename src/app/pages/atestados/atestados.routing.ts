@@ -4,7 +4,7 @@ import { AtestadosComponent } from './atestados.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: AtestadosComponent
   }
 ];

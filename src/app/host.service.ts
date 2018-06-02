@@ -4,11 +4,11 @@ import axios from "axios";
 @Injectable()
 export class HostService {
   host: string = "http://localhost:8080/api/";
-  cabecalho: object = { jwt: window.localStorage.getItem("jwt") };
+  cabecalho: object = { Authorization: window.localStorage.getItem("jwt-login") };
   constructor() {}
   public defaultGet(url: string, parametros: any, callback: Function) {
     axios
-      .get(url, {
+      .get(this.host + url, {
         params: parametros,
         headers: this.cabecalho
       })
