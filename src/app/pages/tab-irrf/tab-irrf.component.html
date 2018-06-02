@@ -1,16 +1,40 @@
 <div class="widgets">
     <div class="row">
-        <div class="col-md-12">
-            <ba-card cardTitle="" baCardClass="with-scroll">
-                <form>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <ng2-smart-table [settings]="settingsTable" [source]="sourceTable" (deleteConfirm)="onDeleteConfirm($event)">
-                            </ng2-smart-table>
-                        </div>
+        <!-- Dados pessoais -->
+        <ba-card cardTitle="CAD. TABELA IRRF">
+            <form>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="input01">Periodo Inicial</label>
+                        <input type="date" class="form-control" id="g1-" placeholder="">
                     </div>
-                </form>
-            </ba-card>
-        </div>
+                    <div class="form-group col-md-4">
+                        <label for="input01">Periodo Final</label>
+                        <input type="date" class="form-control" id="g1-" placeholder="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="input01">Percentual</label>
+                        <input type="number" class="form-control" id="g1-" placeholder="0,00">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="input01">Valor Inicial</label>
+                        <input type="number" class="form-control" id="g1-" placeholder="0.000,00">
+                        <!-- <input type="number" onblur="formataValores(15)" class="form-control" id="g1-" placeholder="0.000,00"> -->
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="input01">Valor final</label>
+                        <input type="number" class="form-control" id="g1-" placeholder="0.000,00">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="input01">Valor Dedução</label>
+                        <input type="number" class="form-control" id="g1-" placeholder="0.000,00">
+                    </div>
+                </div>
+                <button class=""(click)="formataValores(1562,36)" >Salvar</button>
+            </form>
+        </ba-card>
+
     </div>
 </div>
