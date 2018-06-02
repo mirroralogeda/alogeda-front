@@ -18,10 +18,17 @@ export class AtestadosService {
 
   }
 
-  getAllAtestados(id:number,callback: Function) {
-    this.hostService.defaultGet("atestados/getall", {funcionario:id}, callback);
+  getAllAtestados(id: number, callback: Function) {
+    this.hostService.defaultGet("atestados/getall", { funcionario: id }, callback);
   }
+  add(data: any, callback: Function) {
+    this.hostService.defaultPost("atestados/save", data, callback);
 
+  }
+  delete(data, callback: Function) {
+    this.hostService.defaultPost("atestados/delete", data, callback);
+
+  }
   getDataTable(data) {
     console.log(data);
 
