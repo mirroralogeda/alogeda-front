@@ -9,7 +9,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'cidades',
-  templateUrl: "./cidades.component.html",
+  templateUrl: './cidades.component.html',
   styleUrls: ['./cidades.component.scss'],
   providers: [CidadesService]
 })
