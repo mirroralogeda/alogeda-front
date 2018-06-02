@@ -12,14 +12,18 @@ import { Resposta } from './resposta.model';
 
 @Injectable()
 export class CidadesService {
+  url = "http://localhost:8080/api/cidades/getall";
 
-  url: string = "http://localhost:8080/api/cidades/getall";
+  constructor(private http: Http) {
 
-  constructor(private http: Http) { }
+  }
 
   // getAllActors retorna um Observable
   getAllCidades() {
-    return this.http.get(this.url).map(res => res.json() );
+    return this.http.get(this.url).map(res => {
+      console.log(res.json());
+      return res.json();
+    });
   }
 
   getDataTable(data) {
