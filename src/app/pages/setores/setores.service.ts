@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers} from '@angular/http';
+import { HostService } from "../../host.service";
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -12,27 +13,50 @@ import { Resposta } from './resposta.model';
 
 @Injectable()
 export class SetoresService {
-  url = "http://localhost:8080/api/setores/getall"
+  urlSetores = "http://localhost:8080/api/setores/"
+  token = window.localStorage.getItem("jwt-login");
 
-  constructor(private http: Http) {
+  httpOptions = {
+    headers: new Headers({
+      'Authorization': this.token
+    })
+  };
 
-  }
+  constructor(private hostService: HostService, private http: Http) { }
 
   getAllSetores() {
-    return this.http.get(this.url).map(res => {
+    return this.http.get(this.urlSetores + 'getall', this.httpOptions).map(res => {
       console.log(res.json());
       return res.json();
     });
   }
 
-  getDataTable(data) {
-    console.log(data);
-
-    let result = data.result.map(item => item.nome);
-    console.log(result);
-    return result;
-
+  save(data) {
+    return this.http.post(this.urlSetores + 'save', data, this.httpOptions)
+    .map(res => res.json())
+    .catch(this.handleError);
   }
+
+  delete(data) {
+    return this.http.post(this.urlSetores + 'delete', data, this.httpOptions)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  private handleError(error: any) {
+    return Observable.throw(error);
+  }
+
+  // getDataTable(data) {
+  //   console.log(data);
+
+  //   let result = data.result.map(item => {
+  //     return { nome: item.nome };
+  //   });
+  //   console.log(result);
+  //   return result;
+
+  // }
 
 
 }

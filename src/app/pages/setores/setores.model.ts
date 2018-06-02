@@ -1,4 +1,4 @@
 export class Setores {
-    setor_id: number;
+    id: number;
     nome: string;
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import {
+  FormGroup,
+  AbstractControl,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
 import { SetoresService } from "./setores.service";
-import { Resposta } from "./resposta.model";
-import { Setores } from "./setores.model";
-
-import { LocalDataSource } from 'ng2-smart-table';
+import { HostService } from "../../host.service";
 
 @Component({
   selector: 'setores',
@@ -14,50 +16,78 @@ import { LocalDataSource } from 'ng2-smart-table';
   providers: [SetoresService]
 })
 export class SetoresComponent implements OnInit {
-
-  resposta: Resposta;
-
-  constructor(private activeModal: NgbModal, private setoresService: SetoresService) {}
-
-  ngOnInit() {
-    this.setoresService.getAllSetores()
-      .subscribe( (dados) => {
-        this.resposta = dados;
-        this.sourceTable.load(this.setoresService.getDataTable(dados));
-
-      });
+  public form: FormGroup;
+  insert = true;
+  resposta;
+  public nome;
+  public id;
+  setor: any = {
+    id: '',
+    nome: ''
+  };
 
 
+  constructor(
+    fb: FormBuilder,
+    private activeModal: NgbModal,
+    private setoresService: SetoresService,
+    public hostService: HostService) {
+
+    this.form = fb.group({
+      nome: [
+        "",
+        Validators.compose([Validators.required, Validators.minLength(1)])
+      ],
+      id: [
+        0
+      ]
+    });
+    this.nome = this.form.controls["nome"];
+    this.id = this.form.controls["id"];
   }
 
+  ngOnInit() {
+    this.getSetores();
 
+  }
+  getSetores() {
+    this.setoresService.getAllSetores()
+      .subscribe((dados) => {
+        this.resposta = dados.result;
+      });
+  }
 
+  public setSetor(setor) {
+    this.form.controls["nome"].setValue(setor.nome);
+    this.form.controls["id"].setValue(setor.id);
+    this.insert = false;
+  }
 
-  settingsTable = {
-    add: {
-      addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-      createButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
-      saveButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    columns: {
-      nome: {
-        title: 'Nome do setor',
-        type: 'string'
-      }
+  public setNovo() {
+    this.form.controls["nome"].reset();
+    this.form.controls["id"].reset();
+    this.insert = true;
+  }
+
+  public onSubmit(values: Object): void {
+    if (this.form.valid) {
+      this.setoresService.save(this.form.value)
+      .subscribe((dados) => {
+        console.log(dados);
+
+        this.getSetores();
+        this.setNovo();
+      });
     }
-  };
-  sourceTable: LocalDataSource = new LocalDataSource();
+  }
 
-
+  public onDelete(form) {
+    this.setoresService.delete(this.form.value)
+      .subscribe((dados) => {
+        this.getSetores();
+        this.setNovo();
+      });
+  }
 
 
 }
