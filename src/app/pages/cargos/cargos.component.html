@@ -2,16 +2,64 @@
   <div class="row">
 
     <div class="col-md-12">
+      <div class=row>
+        <div class="col-md-6 col-sm-12">
+          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+            <table class="table table-hover">
+              <thead>
+                <tr class="black-muted-bg">
+                  <th style="text-align: left">Nome</th>
+                  <th style="text-align: left">CBO</th>
+                  <th style="text-align: left">Setor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of cargos" class="no-top-border">
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.nome}}</td>
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.cbo_id}}</td>
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.setor_id}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ba-card>
+        </div>
 
-      <ba-card cardTitle="" baCardClass="with-scroll">
-        <form>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <ng2-smart-table [settings]="settingsTable" [source]="sourceTable" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
-            </div>
-          </div>
-        </form>
-      </ba-card>
+
+        <div class="col-md-6 col-sm-12">
+          <ba-card cardTitle="" baCardClass="with-scroll">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+              <div class="form-group col-md-12">
+
+                <label for="input01">Nome</label>
+                <input [formControl]="nome" type="text" class="form-control required" id="nome" name="nome" placeholder="">
+
+                <label for="input01">Atribuições</label>
+                <input [formControl]="atribuicao" type="text" class="form-control required" id="atribuicao" name="atribuicao" placeholder="">
+
+                <label for="input01">CBO</label>
+                <select [formControl]="cbo_id" class="form-control">
+                  <option></option>
+                  <option *ngFor="let cbo of cbos" [value]="cbo.id">{{cbo.codigo +' - '+ cbo.descricao}}</option>
+                </select>
+
+
+                <label for="input01">Setor</label>
+                <select [formControl]="setor_id" class="form-control">
+                  <option></option>
+                  <option *ngFor="let setor of setores" [value]="setor.id">{{setor.nome}}</option>
+                </select>
+
+                <div style="margin-top: 10px">
+                  <button *ngIf="insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                  <button *ngIf="!insert" (click)="setNovo()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar / Novo</button>
+                  <button *ngIf="!insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
+                  <button *ngIf="!insert" (click)="onDelete(form.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+                </div>
+              </div>
+            </form>
+          </ba-card>
+        </div>
+      </div>
     </div>
 
   </div>

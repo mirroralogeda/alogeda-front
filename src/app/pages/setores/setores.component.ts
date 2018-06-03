@@ -81,7 +81,7 @@ export class SetoresComponent implements OnInit {
     }
   }
 
-  public onDelete(form) {
+  public onDelete() {
     this.setoresService.delete(this.form.value)
       .subscribe((dados) => {
         this.getSetores();
