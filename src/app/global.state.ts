@@ -13,7 +13,6 @@ export class GlobalState {
   >();
 
   constructor(private loginService: LoginService) {
-    this.loginService.alteracaoDeRota();
     this._dataStream$.subscribe(data => this._onEvent(data));
   }
 

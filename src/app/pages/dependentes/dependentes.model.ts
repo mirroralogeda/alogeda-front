@@ -1,11 +1,14 @@
+import { Charts } from "../charts";
+
 export class Dependentes {
-    id: number;
-    data_nascimento: number;
+
+    id: number; 
+    dataNascimento: Date;
     cpf: number;
-    certidao_nascimento: string;
-    imposto_renda: string;
-    auxilio_creche: string;
-    salario_familia: string;
+    certidaoNascimento: string;
+    impostoRenda: Charts;
+    auxilioCreche: Charts;
+    salarioFamilia: Charts;
     nome: string;
-    funcionarios_id: string;
+    funcionarios_id: number;
 }

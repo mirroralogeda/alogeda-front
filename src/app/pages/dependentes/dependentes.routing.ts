@@ -4,7 +4,7 @@ import { DependentesComponent } from './dependentes.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: DependentesComponent
   }
 ];

@@ -1,5 +1,23 @@
-{{teste}}
-<li *ngFor="let a of resposta.result"> {{a.nome}} </li>
 
+<h1>Dependentes</h1>
+<div class="widgets">
+    <div class="row">
 
+        <div class="col-md-12">
 
+            <ba-card cardTitle="" baCardClass="with-scroll">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <ng2-smart-table
+                            (createConfirm)="addRecord($event)"
+                            (editConfirm)="updateRecord($event)"
+                             [settings]="settingsTable" [source]="sourceTable" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+                        </div>
+                    </div>
+                </form>
+            </ba-card>
+        </div>
+
+    </div>
+</div>

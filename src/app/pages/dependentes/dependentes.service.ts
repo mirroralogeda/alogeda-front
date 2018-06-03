@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -9,22 +9,26 @@ import { Observable } from 'rxjs/Rx';
 
 import { Dependentes } from './dependentes.model';
 import { Resposta } from './resposta.model';
-
+import { HostService } from '../../host.service'
 @Injectable()
 export class DependentesService {
   url = "http://localhost:8080/api/dependentes/getall"
 
-  constructor(private http: Http) {
+  constructor(public hostService: HostService) {
 
   }
 
-  getAllDependentes() {
-    return this.http.get(this.url).map(res => {
-      console.log(res.json());
-      return res.json();
-    });
+  getAllDependentes(id: number, callback: Function) {
+    this.hostService.defaultGet("dependentes/getall", { funcionario: id }, callback);
   }
+  add(data: any, callback: Function) {
+    this.hostService.defaultPost("dependentes/save", data, callback);
 
+  }
+  delete(data, callback: Function) {
+    this.hostService.defaultPost("dependentes/delete", data, callback);
+
+  }
   getDataTable(data) {
     console.log(data);
 

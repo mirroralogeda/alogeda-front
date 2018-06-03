@@ -1,5 +1,5 @@
-export class Eventos {
+export class GrupoEventos {
   id: number;
-  descricao: string;
-  observacoes: string;
+  descricao: String;
+  observacoes: String;
 }
