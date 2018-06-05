@@ -105,8 +105,8 @@ export class CargosComponent implements OnInit {
     this.form.controls["id"].setValue(cargo.id);
     this.form.controls["nome"].setValue(cargo.nome);
     this.form.controls["atribuicoes"].setValue(cargo.atribuicoes);
-    this.form.controls["cbo"].reset();
-    this.form.controls["setores"].reset();
+    this.form.controls["cbo"].setValue(cargo.cbo.id);
+    this.form.controls["setores"].setValue(cargo.setores.id);
     this.insert = false;
   }
 
