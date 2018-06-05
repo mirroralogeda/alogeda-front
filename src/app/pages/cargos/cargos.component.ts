@@ -34,9 +34,10 @@ export class CargosComponent implements OnInit {
     atribuicao: '',
     cbo: {
       id: '',
+      codigo:'',
       nome: ''
     },
-    setor: {
+    setores: {
       id: '',
       nome: ''
     }
