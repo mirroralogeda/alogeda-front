@@ -1,43 +1,58 @@
 import { Component, OnInit } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-
 import { EventosService } from "./eventos.service";
-import { Eventos } from "./eventos.model";
-
-import { LocalDataSource } from "ng2-smart-table";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { GrupoEventosService } from "../grupo-eventos/grupo-eventos.service";
 
 @Component({
-  selector: "eventos",
-  templateUrl: "./eventos.component.html",
-  styleUrls: ["./eventos.component.scss"]
+  selector: "data-tables",
+  templateUrl: "./eventos.html",
+  styleUrls: ["./eventos.scss"]
 })
-export class EventosComponent implements OnInit {
-  // eventos;
-  ngOnInit() {}
+export class EventosComponent {
+  data;
+  gruposEventos;
+  veioGrupos = false;
+  public formGroup = new FormGroup({
+    id: new FormControl(''),
+    grupoEventos: new FormControl(''),
+    descricao: new FormControl(''),
+    tipo: new FormControl(''),
+    formula: new FormControl(''),
+    automatico: new FormControl(''),
+    referencia: new FormControl(''),
+    percentual: new FormControl(''),
+    valorMinimo: new FormControl(''),
+    valorMaximo: new FormControl(''),
+    incidencias: new FormControl(''),
+    ordemCalculo: new FormControl('')
+  });
 
-  constructor(private activeModal: NgbModal) {}
+  constructor(
+    private gruposEventosService: GrupoEventosService,
+    private service: EventosService,
+    private modalService: NgbModal
+  ) {
+    this.service.getData().then(data => {
+      console.log(data);
+      this.data = data;
+    });
 
-  settingsTable = {
-    add: {
-      addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-      createButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>'
-    },
-    edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
-      saveButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>'
-    },
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    columns: {
-      nome: {
-        title: "Nome do Cargo",
-        type: "string"
-      }
-    }
-  };
-  sourceTable: LocalDataSource = new LocalDataSource();
+    this.gruposEventosService.getAllGrupoEventos(retorno => {
+      console.log("grupos", retorno);
+      this.veioGrupos = true;
+      this.gruposEventos = retorno;
+    });
+  }
+
+  setVal(item) {}
+
+  public onSubmit(item) {
+    console.log(this.formGroup);
+  }
+  public setNovo() {}
+  public onDelete(item) {}
+  formatarGrupo(item) {
+    if (item) return item.id + " - " + item.descricao + "";
+  }
 }

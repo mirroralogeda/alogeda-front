@@ -14,32 +14,33 @@ export const routes: Routes = [
   //   path: 'register',
   //   loadChildren: 'app/pages/register/register.module#RegisterModule'
   // },
+  { path: "", redirectTo: "/pages", pathMatch: "full" },
   {
     path: "pages",
     component: Pages,
     children: [
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
-      {
-        path: "dashboard",
-        loadChildren: "./dashboard/dashboard.module#DashboardModule"
-      },
+      { path: "", redirectTo: "curriculos", pathMatch: "full" },
+      // {
+      //   path: "dashboard",
+      //   loadChildren: "./dashboard/dashboard.module#DashboardModule"
+      // },
       {
         path: "curriculos",
         loadChildren: "./curriculos/curriculos.module#CurriculosModule"
       },
-      {
-        path: "editors",
-        loadChildren: "./editors/editors.module#EditorsModule"
-      },
-      {
-        path: "components",
-        loadChildren: "./components/components.module#ComponentsModule"
-      },
-      { path: "charts", loadChildren: "./charts/charts.module#ChartsModule" },
+      // {
+      //   path: "editors",
+      //   loadChildren: "./editors/editors.module#EditorsModule"
+      // },
+      // {
+      //   path: "components",
+      //   loadChildren: "./components/components.module#ComponentsModule"
+      // },
+      // { path: "charts", loadChildren: "./charts/charts.module#ChartsModule" },
       { path: "ui", loadChildren: "./ui/ui.module#UiModule" },
       { path: "forms", loadChildren: "./forms/forms.module#FormsModule" },
       { path: "tables", loadChildren: "./tables/tables.module#TablesModule" },
-      { path: "maps", loadChildren: "./maps/maps.module#MapsModule" },
+      // { path: "maps", loadChildren: "./maps/maps.module#MapsModule" },
       {
         path: "cadastros/cidades",
         loadChildren: "./cidades/cidades.module#CidadesModule"

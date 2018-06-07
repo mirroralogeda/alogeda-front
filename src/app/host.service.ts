@@ -11,6 +11,7 @@ export class HostService {
 
   private tratamentoErro(error) {
     let erro = error.response;
+    console.log(erro)
     if(erro.status >= 500){
       console.log('erro no servidor')
     }
