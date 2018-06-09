@@ -6,9 +6,9 @@ export class Dependentes {
     dataNascimento: Date;
     cpf: number;
     certidaoNascimento: string;
-    impostoRenda: Charts;
-    auxilioCreche: Charts;
-    salarioFamilia: Charts;
+    impostoRenda: string;
+    auxilioCreche: string;
+    salarioFamilia: string;
     nome: string;
     funcionarios_id: number;
 }

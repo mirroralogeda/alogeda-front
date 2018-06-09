@@ -25,7 +25,7 @@ export const routes: Routes = [
       //   loadChildren: "./dashboard/dashboard.module#DashboardModule"
       // },
       {
-        path: "curriculos",
+        path: "recrutamento/curriculos",
         loadChildren: "./curriculos/curriculos.module#CurriculosModule"
       },
       // {
@@ -40,13 +40,13 @@ export const routes: Routes = [
       { path: "ui", loadChildren: "./ui/ui.module#UiModule" },
       { path: "forms", loadChildren: "./forms/forms.module#FormsModule" },
       { path: "tables", loadChildren: "./tables/tables.module#TablesModule" },
-      // { path: "maps", loadChildren: "./maps/maps.module#MapsModule" },
+    
       {
         path: "cadastros/cidades",
         loadChildren: "./cidades/cidades.module#CidadesModule"
       },
       {
-        path: "cadastros/setores",
+        path: "cargos/setores",
         loadChildren: "./setores/setores.module#SetoresModule"
       },
       {
@@ -54,7 +54,7 @@ export const routes: Routes = [
         loadChildren: "./atestados/atestados.module#AtestadosModule"
       },
       {
-        path: "cadastros/cargos",
+        path: "cargos/cargos",
         loadChildren: "./cargos/cargos.module#CargosModule"
       },
       {

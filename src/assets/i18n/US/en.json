@@ -18,6 +18,8 @@
       "option1": "Option 1"
     },
     "menu": {
+      "rc": "Recrutamento",
+      "csbf":"Cargos",
       "cadastros": "Cadastros",
       "cidades": "Cidades",
       "cargos": "Cargos",
