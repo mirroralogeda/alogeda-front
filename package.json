@@ -17,7 +17,7 @@
     "rimraf": "rimraf",
     "wintersmith": "wintersmith",
     "changelog": "standard-changelog",
-    "start": "ng serve",
+    "start": "ng serve --verbose  --hmr",
     "start:hmr": "ng serve --hmr",
     "start:aot": "ng serve --aot",
     "start:prod": "ng serve --prod",
