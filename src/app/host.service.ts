@@ -39,7 +39,7 @@ export class HostService {
       this.router.navigateByUrl("/login");
     } else if (this.router.url === "/login") {
       console.log("loado");
-      this.router.navigateByUrl("/pages/dashboard");
+      this.router.navigateByUrl("/pages/");
     }
   }
 

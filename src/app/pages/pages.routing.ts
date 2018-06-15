@@ -1,9 +1,6 @@
 import { Routes, RouterModule } from "@angular/router";
 import { Pages } from "./pages.component";
 import { ModuleWithProviders } from "@angular/core";
-// noinspection TypeScriptValidateTypes
-
-// export function loadChildren(path) { return System.import(path); };
 
 export const routes: Routes = [
   {
@@ -40,7 +37,7 @@ export const routes: Routes = [
       { path: "ui", loadChildren: "./ui/ui.module#UiModule" },
       { path: "forms", loadChildren: "./forms/forms.module#FormsModule" },
       { path: "tables", loadChildren: "./tables/tables.module#TablesModule" },
-    
+
       {
         path: "cadastros/cidades",
         loadChildren: "./cidades/cidades.module#CidadesModule"

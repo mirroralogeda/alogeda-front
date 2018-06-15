@@ -47,7 +47,6 @@ export class EventosComponent {
     private hostService: HostService
   ) {
     this.service.getData().then(data => {
-      console.log(data);
       this.data = data;
     });
 
@@ -63,20 +62,19 @@ export class EventosComponent {
   }
 
   public onSubmit(item) {
-    console.log(this.form.value);
+    let data = this.form.value;
+    data.grupoEventos = { id: parseInt(data.grupoEventos) };
     this.hostService.defaultPost("eventos/save", this.form.value, ret => {
-      console.log(ret);
       if (ret.status === 200) {
         this.insercao = false;
         this.form.reset();
-        console.log(this.form);
       }
     });
   }
   protected addGrupoEvento(item) {
-    let dados = this.form.value;
-    dados.grupoEventos = { id: item };
-    this.form.setValue(dados);
+    // let dados = this.form.value;
+    // dados.grupoEventos = { id: item };
+    // this.form.setValue(dados);
   }
 
   protected addNovo() {
@@ -89,7 +87,6 @@ export class EventosComponent {
   }
 
   protected delete() {
-    console.log("delete");
     this.hostService.defaultPost("eventos/delete", this.form.value, ret => {
       console.log(ret);
     });

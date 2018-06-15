@@ -44,8 +44,8 @@
               <input formControlName="valorMinimo" type="number" class="form-control required" id="valorMinimo" name="valorMinimo" placeholder="Valor Minimo">
 
               <label for="grupoEventos">Grupos</label>
-              <select name="grupoEventos" [value]="grupoEventosSelecionado" class="form-control">
-                <option *ngFor="let item of gruposEventos" [value]="item" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
+              <select name="grupoEventos" formControlName="grupoEventos" class="form-control">
+                <option *ngFor="let item of gruposEventos" [value]="item.id" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
               </select>
 
               <div style="margin-top: 10px">
