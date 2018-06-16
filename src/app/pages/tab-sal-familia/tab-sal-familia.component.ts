@@ -1,53 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TabSalFamilia } from "./tab-sal-familia.model";
-import { LocalDataSource } from 'ng2-smart-table';
+import { TabSalFamiliaService } from "./tab-sal-familia.service";
+import { HostService } from "../../host.service";
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import { Jsonp } from '@angular/http';
 
 @Component({
-    selector: 'tabSalFamilia',
-    templateUrl: './tab-sal-familia.component.html',
-    styleUrls: ['./tab-sal-familia.component.scss'],
+  selector: 'tabSalFamilia',
+  templateUrl: './tab-sal-familia.component.html',
+  styleUrls: ['./tab-sal-familia.component.scss'],
 })
 export class TabSalFamiliaComponent implements OnInit {
-    ngOnInit() { }
-    constructor(private activeModal: NgbModal) { }
-    settingsTable = {
-        add: {
-            addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-            createButtonContent: '<i class="ion-checkmark"></i>',
-            cancelButtonContent: '<i class="ion-close"></i>',
-        },
-        edit: {
-            editButtonContent: '<i class="ion-edit"></i>',
-            saveButtonContent: '<i class="ion-checkmark"></i>',
-            cancelButtonContent: '<i class="ion-close"></i>',
-        },
-        delete: {
-            deleteButtonContent: '<i class="ion-trash-a"></i>',
-            confirmDelete: true
-        },
-        columns: {
-            valInicial: {
-                title: 'Valor Inicial',
-                type: 'number'
-            },
-            valFinal: {
-                title: 'Valor Final',
-                type: 'number'
-            },
-            valor: {
-                title: 'Valor',
-                type: 'number'
-            },
-            perInicial: {
-                title: 'Período Inicial',
-                type: 'date',
-            },
-            perFinal: {
-                title: 'Período Final',
-                type: 'date',                
-                           },            
-        }
-    };
-    sourceTable: LocalDataSource = new LocalDataSource();
+  insercao: boolean = false;
+  data: TabSalFamilia[];
+  tabSelecionada: TabSalFamilia;
+  form = new FormBuilder().group({
+    periodoInicial: new FormControl(),
+    periodoFinal: new FormControl()
+  });
+
+  constructor(private activeModal: NgbModal,
+    private service: TabSalFamiliaService,
+    fb: FormBuilder,
+    modalService: NgbModal) {
+  }
+
+  ngOnInit(){
+    this.service.getData().then(data => {
+      this.data = data;
+      this.tabSelecionada = this.service.getVigente(this.data);
+    });
+  }
+
+    protected limpaForm(){
+
+    }
+
+  protected delete() {
+
+  }
+
 }

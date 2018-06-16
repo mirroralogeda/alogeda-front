@@ -1,8 +1,16 @@
 export class TabSalFamilia {
-    id: number;
-    valInicial: number;
-    valFinal: number;
-    valor: number;
-    perInicial: Date;
-    perFinal: Date;
+    constructor (public id: number,
+    public perInicial: Date,
+    public perFinal: Date,
+  public faixas: Faixa[]){
+
+  }
 }
+
+export class Faixa {
+	    constructor (public valInicial: number,
+    public valFinal: number,
+    public valor: number){
+
+    }
+	}
