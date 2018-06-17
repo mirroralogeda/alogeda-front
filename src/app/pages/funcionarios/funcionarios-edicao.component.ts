@@ -58,7 +58,7 @@ export class FuncionariosEdicaoComponent implements OnInit {
   }
   dataParaCliente(dataServidor) {
     if (!dataServidor) {
-      return "null"
+      return ""
     }
     return dataServidor.substr(6, 4) + "-" + dataServidor.substr(3, 2) + "-" + dataServidor.substr(0, 2);
   }
