@@ -16,7 +16,7 @@ export class LoginService {
         password: senha
       },
       e => {
-        console.log(e);
+        console.log("token", e);
         let token = e.headers.authorization;
         this.setarToken(token);
       }
@@ -35,7 +35,7 @@ export class LoginService {
   }
 
   public verificaLogin() {
-    console.log('verificando Login');
+    console.log("verificando Login");
     if (!this.getToken() && this.router.url !== "/login") {
       console.log("não logado");
       this.router.navigateByUrl("/login");

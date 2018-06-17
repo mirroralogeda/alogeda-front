@@ -1,0 +1,89 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-12">
+
+
+
+
+
+
+
+      <div class="col-md-12 col-sm-12" *ngIf="insercao">
+        <ba-card>
+          <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+            <div class="form-group col-md-12">
+
+
+
+              <label for="nome">Nome</label>
+              <input formControlName="nome" id="nome" class="form-control required" placeholder="Nome">
+
+              <label for="nome">CPF</label>
+              <input formControlName="cpf" id="CPF" class="form-control required" placeholder="CPF">
+
+              <label for="rg">CPF</label>
+              <input formControlName="rg" class="form-control required" placeholder="rg">
+
+              <label for="orgaoEmissorRg">Orgao Emissor RG</label>
+              <input formControlName="orgaoEmissorRg" id="orgaoEmissorRg" class="form-control required" placeholder="Orgao Emissor Rg">
+
+              <label for="estadoEmissorRg">Estado Emissor Rg</label>
+              <input formControlName="estadoEmissorRg" id="estadoEmissorRg" class="form-control required" placeholder="Estado Emissor Rg">
+
+              <label for="dataEmissãoRg">Data Emissão Rg</label>
+              <input formControlName="dataEmissãoRg" id="dataEmissãoRg" class="form-control required" placeholder="Data Emissão RG">
+
+              <label for="email">Email</label>
+              <input formControlName="email" id="email" class="form-control required" placeholder="Email">
+
+              <label for="telefone">Telefone</label>
+              <input formControlName="telefone" id="telefone" class="form-control required" placeholder="Telefone">
+
+              <label for="genero">Genero</label>
+              <input formControlName="genero" id="genero" class="form-control required" placeholder="genero">
+
+
+              <div style="margin-top: 10px">
+                <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </ba-card>
+      </div>
+
+
+      <div *ngIf="!insercao">
+        <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
+        <div class="col-md-11 col-sm-11">
+          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+            <table class="table table-hover">
+              <thead>
+                <tr class="black-muted-bg">
+                  <th style="text-align: left">Nome</th>
+                  <th style="text-align: left">Genero</th>
+                  <th style="text-align: left">CPF</th>
+                  <th style="text-align: left">Email</th>
+                  <th style="text-align: left">Telefone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
+                  <td style="text-align: left">{{item.nome}}</td>
+                  <td style="text-align: left">{{item.genero}}%</td>
+                  <td style="text-align: left">{{item.cpf}}</td>
+                  <td style="text-align: left">{{item.telefone}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ba-card>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>
