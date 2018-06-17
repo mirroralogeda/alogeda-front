@@ -82,6 +82,14 @@ export const routes: Routes = [
       {
         path: "cadastros/grupo-eventos",
         loadChildren: "./grupo-eventos/grupo-eventos.module#GrupoEventosModule"
+      },
+      {
+        path: "cadastros/eventosFixos",
+        loadChildren: "./eventosFixos/eventosFixos.module#EventosFixosModule"
+      },
+      {
+        path: "cadastros/pessoas",
+        loadChildren: "./pessoas/pessoas.module#PessoasModule"
       }
     ]
   }
