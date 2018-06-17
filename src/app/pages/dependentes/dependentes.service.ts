@@ -21,8 +21,8 @@ export class DependentesService {
   getAllDependentes(id: number, callback: Function) {
     this.hostService.defaultGet("dependentes/getall", { funcionario: id }, callback);
   }
-  add(data: any, callback: Function) {
-    this.hostService.defaultPost("dependentes/save", data, callback);
+  add(funcionarioId, data: any, callback: Function) {
+    this.hostService.defaultPost("dependentes/save/"+funcionarioId, data, callback);
 
   }
   delete(data, callback: Function) {

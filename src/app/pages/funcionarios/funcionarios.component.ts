@@ -26,10 +26,14 @@ export class FuncionariosComponent implements OnInit {
       this.resposta.result=resultado;
     })
   }
-  alterar(item){
-    
+  alterarFuncionario(item){
     this.router.navigate(["pages/cargos/funcionarios/edit/"+item.id])
   }
-
+  alterarDependentes(item){
+    this.router.navigate(["pages/cadastros/dependentes/"+item.id])
+  }
+  alterarAtestados(item){
+    this.router.navigate(["pages/cadastros/atestados/"+item.id])
+  }
   constructor(private FuncionarioService: FuncionarioService,private router:Router) { }
 }
