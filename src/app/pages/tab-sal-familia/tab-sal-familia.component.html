@@ -1,16 +1,86 @@
 <div class="widgets">
-    <div class="row">
-        <div class="col-md-12">
-            <ba-card cardTitle="" baCardClass="with-scroll">
-                <form>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <ng2-smart-table [settings]="settingsTable" [source]="sourceTable" (deleteConfirm)="onDeleteConfirm($event)">
-                            </ng2-smart-table>
-                        </div>
-                    </div>
-                </form>
-            </ba-card>
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="col-md-12 col-sm-12" *ngIf="edicao">
+        <ba-card>
+          <form (ngSubmit)="submit()">
+            <div class="form-group col-md-12">
+              <label for="periodoInicial">Período Inicial</label>
+              <input type="date" class="form-control" [value]="tabSelecionada.perInicial" />
+
+              <label for="periodoFinal">Período Final</label>
+              <input type="date" class="form-control" [value]="tabSelecionada.perFinal" />
+
+              <div style="margin-top: 3px">
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="black-muted-bg">
+                      <th style="text-align: left">Valor Inicial</th>
+                      <th style="text-align: left">Valor Final</th>
+                      <th style="text-align: left">Valor</th>
+                      <th>
+                        <button type="button" (click)="addLinha()" class="btn">+</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="tabSelecionada">
+                    <tr *ngFor="let faixa of tabSelecionada?.faixas; let i = index" class="no-top-border">
+                      <td>
+                        <input type="text" class="form-control" required [(ngModel)]="faixa.valInicial" name="val{{faixa.valInicial}}">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control" required [(ngModel)]="faixa.valFinal" name="val{{faixa.valFinal}}">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control" required [(ngModel)]="faixa.valor" name="val{{faixa.valor}}">
+                      </td>
+                      <td>
+                        <button type="button" (click)="removeLinha(i)" class="btn">X</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style="margin-top: 10px">
+                <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                <button type="button" (click)="cancela()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
+              </div>
+
+            </div>
+          </form>
+        </ba-card>
+      </div>
+
+      <div *ngIf="!edicao">
+        <button *ngIf="tabSelecionada" (click)="editar()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Editar</button>
+        <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
+        <div *ngIf="tabSelecionada">
+          Tabela do período de {{tabSelecionada.perInicial}} até {{tabSelecionada.perFinal}}
         </div>
+        <table class="table table-hover">
+          <thead>
+            <tr class="black-muted-bg">
+              <th style="text-align: left">Valor Inicial</th>
+              <th style="text-align: left">Valor Final</th>
+              <th style="text-align: left">Valor</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="tabSelecionada">
+            <tr *ngFor="let faixa of tabSelecionada?.faixas" class="no-top-border">
+              <td>{{faixa.valInicial}}</td>
+              <td>{{faixa.valFinal}}</td>
+              <td>{{faixa.valor}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-md-11 col-sm-11">
+          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+          </ba-card>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>
