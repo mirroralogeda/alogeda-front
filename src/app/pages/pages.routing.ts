@@ -47,6 +47,10 @@ export const routes: Routes = [
         loadChildren: "./setores/setores.module#SetoresModule"
       },
       {
+        path: "cargos/funcionarios",
+        loadChildren: "./funcionarios/funcionarios.module#FuncionariosModule"
+      },
+      {
         path: "cadastros/atestados",
         loadChildren: "./atestados/atestados.module#AtestadosModule"
       },

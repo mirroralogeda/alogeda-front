@@ -140,6 +140,14 @@ export const PAGES_MENU = [
             }
           },
           {
+            path: "funcionarios",
+            data: {
+              menu: {
+                title: "general.menu.funcionarios"
+              }
+            }
+          },
+          {
             path: "cargos",
             data: {
               menu: {
