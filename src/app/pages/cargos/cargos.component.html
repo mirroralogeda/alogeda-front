@@ -16,7 +16,7 @@
               <tbody>
                 <tr *ngFor="let item of cargos" class="no-top-border">
                   <td (click)="setCargo(item)" style="text-align: left">{{item.nome}}</td>
-                  <td (click)="setCargo(item)" style="text-align: left">{{item.cbo.codigo + ' - ' + item.cbo.descricao}}</td>
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.cbo.codigo}}</td>
                   <td (click)="setCargo(item)" style="text-align: left">{{item.setores.nome}}</td>
                 </tr>
               </tbody>
