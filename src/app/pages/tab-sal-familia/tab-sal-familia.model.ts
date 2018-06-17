@@ -8,9 +8,9 @@ export class TabSalFamilia {
 }
 
 export class Faixa {
-	    constructor (public valInicial: number,
-    public valFinal: number,
-    public valor: number){
+	    constructor (public valInicial: number=0,
+    public valFinal: number=0,
+    public valor: number=0){
 
     }
 	}

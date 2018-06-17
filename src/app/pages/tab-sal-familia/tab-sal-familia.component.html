@@ -4,13 +4,13 @@
 
       <div class="col-md-12 col-sm-12">
         <ba-card>
-          <form [formGroup]="form">
+          <form>
             <div class="form-group col-md-12">
               <label for="periodoInicial">Período Inicial</label>
-              <input formControlName="periodoInicial" type="date" class="form-control" id="periodoInicial" name="periodoInicial" placeholder="Período Inicial">
+              <input type="date" class="form-control" id="periodoInicial">
 
               <label for="periodoFinal">Período Final</label>
-              <input formControlName="periodoFinal" type="date" class="form-control" id="periodoFinal" name="periodoFinal" placeholder="Período Final">
+              <input type="date" class="form-control" id="periodoFinal">
 
               <div style="margin-top: 3px">
                 <table class="table table-hover">
@@ -19,13 +19,25 @@
                       <th style="text-align: left">Valor Inicial</th>
                       <th style="text-align: left">Valor Final</th>
                       <th style="text-align: left">Valor</th>
+                      <th>
+                        <button (click)="addLinha()" class="btn">+</button>
+                      </th>
                     </tr>
                   </thead>
                   <tbody ng-if="tabSelecionada">
-                    <tr *ngFor="let faixa of tabSelecionada?.faixas" class="no-top-border">
-                      <td><input type="text" ng-model="faixa.valInicial" value="{{faixa.valInicial}}"></td>
-                      <td><input type="text" ng-model="faixa.valFinal"></td>
-                      <td><input type="text" ng-model="faixa.valor"></td>
+                    <tr *ngFor="let faixa of tabSelecionada?.faixas; let i = index" class="no-top-border">
+                      <td>
+                        <input type="text" [(ngModel)]="faixa.valInicial" name="{{faixa.valInicial}}">
+                      </td>
+                      <td>
+                        <input type="text" [(ngModel)]="faixa.valFinal" name="{{faixa.valFinal}}">
+                      </td>
+                      <td>
+                        <input type="text" [(ngModel)]="faixa.valor" name="{{faixa.valor}}">
+                      </td>
+                      <td>
+                        <button (click)="removeLinha(i)" class="btn">X</button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -34,7 +46,6 @@
               <div style="margin-top: 10px">
                 <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                 <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
-                <button (click)="delete()" class="btn btn-success pull-right" style="margin-left: 6px">Deletar</button>
               </div>
 
             </div>
