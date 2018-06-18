@@ -46,6 +46,10 @@ export const routes: Routes = [
         loadChildren: "./cidades/cidades.module#CidadesModule"
       },
       {
+        path: "recrutamento/vagas",
+        loadChildren: "./vagas/vagas.module#VagasModule"
+      },
+      {
         path: "cargos/setores",
         loadChildren: "./setores/setores.module#SetoresModule"
       },
