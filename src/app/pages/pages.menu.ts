@@ -133,6 +133,14 @@ export const PAGES_MENU = [
               }
             }
           },
+          {
+            path: "vagas",
+            data: {
+              menu: {
+                title: "general.menu.vagas"
+              }
+            }
+          },
         ]
       },
       {
