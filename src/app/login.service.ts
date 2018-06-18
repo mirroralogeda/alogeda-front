@@ -16,12 +16,12 @@ export class LoginService {
         password: senha
       },
       e => {
-        console.log(e);
+        console.log("token", e);
         let token = e.headers.authorization;
         this.setarToken(token);
+        this.verificaLogin();
       }
     );
-    this.verificaLogin();
   }
   public setarToken(token: string) {
     console.log("setar token");
@@ -35,13 +35,13 @@ export class LoginService {
   }
 
   public verificaLogin() {
-    console.log('verificando Login');
+    console.log("verificando Login");
     if (!this.getToken() && this.router.url !== "/login") {
       console.log("não logado");
       this.router.navigateByUrl("/login");
     } else if (this.router.url === "/login") {
       console.log("loado");
-      this.router.navigateByUrl("/pages/dashboard");
+      this.router.navigateByUrl("/pages");
     }
   }
   public logout() {

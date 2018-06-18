@@ -1,7 +1,7 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
-      <ba-card cardTitle="Desenvolvedor Jr." class="modal-buttons">
+      <ba-card cardTitle="Dados pessoais" class="modal-buttons">
         <button [class]="cb1" (click)="selectFase(1)">Dados pessoais</button>
         <button [class]="cb2" (click)="selectFase(2)">Escolaridade</button>
         <button [class]="cb3" (click)="selectFase(3)">Habilidades</button>
@@ -20,50 +20,109 @@
     <div class="col-md-12" *ngIf="show1">
 
       <ba-card cardTitle="Dados pessoais" baCardClass="with-scroll">
-        <form>
+        <form [formGroup]="formPessoa" (ngSubmit)="onSubmitPessoa()">
           <div class="row">
             <div class="form-group col-md-3">
               <label for="input01">CPF</label>
-              <input type="text" class="form-control" id="g1-" placeholder="">
+              <input formControlName="cpf" type="text" (blur)="searchFormPessoa()" class="form-control">
             </div>
             <div class="form-group col-md-3">
               <label for="input01">RG</label>
-              <input type="text" class="form-control" id="g1-" placeholder="">
+              <input formControlName="rg" type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
               <label for="input01">Nome</label>
-              <input type="text" class="form-control" id="g1-" placeholder="">
+              <input formControlName="nome" type="text" class="form-control">
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
               <label for="input01">E-mail</label>
-              <input type="text" class="form-control" id="g1-" placeholder="">
+              <input formControlName="email" type="text" class="form-control">
             </div>
             <div class="form-group col-md-3">
               <label for="input01">Telefone</label>
-              <input type="text" class="form-control" id="g1-" placeholder="(00) 00000-0000">
+              <input formControlName="telefone" type="text" class="form-control" placeholder="(00) 00000-0000">
             </div>
             <div class="form-group col-md-3">
-              <label for="input01">CEP</label>
-              <input type="text" class="form-control" id="g1-" placeholder="00000-000">
-              <span class="help-block sub-little-text">Cidade - UF</span>
+              <label for="input01">Genero</label>
+              <select formControlName="genero" class="form-control">
+                <option></option>
+                <option *ngFor="let item of generos" [value]="item.id">{{item.nome}}</option>
+              </select>
             </div>
           </div>
-          <button class="{{ btnSelected }} pull-right" (click)="selectFase(2, true)">Guardar e prosseguir</button>
+          <button class="{{ btnSelected }} pull-right" type="submit">Guardar / prosseguir</button>
         </form>
       </ba-card>
 
     </div>
 
     <!-- Escolaridade -->
-    <div *ngIf="show2">
-      <div class="col-md-12">
-        <ba-card cardTitle="Escolaridade" baCardClass="with-scroll" class="smart-table-container">
-          <ng2-smart-table [settings]="settings2" [source]="source2" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
-          <button class="{{ btnSelected }} pull-right" (click)="selectFase(3, true)" style="margin-top: 10px">Guardar e prosseguir</button>
-        </ba-card>
-      </div>
+
+    <div class="col-md-12" *ngIf="show2">
+
+      <ba-card cardTitle="Formações" baCardClass="with-scroll">
+        <form [formGroup]="formFormacao" (ngSubmit)="onSubmitFormacao()">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="input01">Instituição de ensino</label>
+              <input formControlName="instituicaoEnsino" type="text" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="input01">Curso</label>
+              <input formControlName="nome" type="text" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="input01">Grau de escolaridade</label>
+              <select formControlName="escolaridade" class="form-control">
+                <option></option>
+                <option *ngFor="let item of escolaridades" [value]="item.id">{{item.grau}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="input01">Data de início</label>
+              <input type="date" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="input01">Data de término</label>
+              <input type="date" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-12">
+              <div style="margin-top: 10px">
+                <button *ngIf="insertFormacao" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                <button *ngIf="!insertFormacao" (click)="setNovoFormacao()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar / Novo</button>
+                <button *ngIf="!insertFormacao" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
+                <button *ngIf="!insertFormacao" (click)="onDeleteFomacao(formFormacao.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ba-card>
+
+      <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+        <table class="table table-hover">
+          <thead>
+            <tr class="black-muted-bg">
+              <th style="text-align: left">Instituição de ensino</th>
+              <th style="text-align: left">Curso</th>
+              <th style="text-align: left">Grau de escolaridade</th>
+              <th style="text-align: left">Inicio</th>
+              <th style="text-align: left">Fim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of formacoes" class="no-top-border">
+              <td (click)="setFormacao(item)" style="text-align: left">{{item.instituicao_ensino}}</td>
+              <td (click)="setFormacao(item)" style="text-align: left">{{item.nome}}</td>
+              <td (click)="setFormacao(item)" style="text-align: left">{{item.escolaridade_id}}</td>
+              <td (click)="setFormacao(item)" style="text-align: left">{{item.data_inicio}}</td>
+              <td (click)="setFormacao(item)" style="text-align: left">{{item.data_fim}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ba-card>
+
     </div>
 
     <!-- Habilidadeas -->

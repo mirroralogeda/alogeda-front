@@ -25,4 +25,11 @@ export class Funcionarios {
     zona_titulo_eleitor: string;
     secao_titulo_eleitor: string;
     pessoas_id: number;
+
+
+
+
+
+
+    
 }

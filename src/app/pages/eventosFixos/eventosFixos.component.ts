@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { EventosService } from "./eventos.service";
+import { EventosFixosService } from "./eventosFixos.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
   FormControl,
@@ -12,10 +12,10 @@ import { HostService } from "../../host.service";
 
 @Component({
   selector: "data-tables",
-  templateUrl: "./eventos.html",
-  styleUrls: ["./eventos.scss"]
+  templateUrl: "./eventosFixos.html",
+  styleUrls: ["./eventosFixos.scss"]
 })
-export class EventosComponent {
+export class EventosFixosComponent {
   insercao: boolean = false;
   data;
   gruposEventos;
@@ -41,7 +41,7 @@ export class EventosComponent {
 
   constructor(
     private gruposEventosService: GrupoEventosService,
-    private service: EventosService,
+    private service: EventosFixosService,
     private modalService: NgbModal,
     fb: FormBuilder,
     private hostService: HostService

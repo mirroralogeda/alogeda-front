@@ -1,0 +1,106 @@
+<div class="widgets">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div class="form-group col-md-12">
+      <label for="pessoas">Pessoa</label>
+      <select name="pessoas" formControlName="pessoas" class="form-control">
+        <option *ngFor="let item of pessoas" [value]="item.id">{{ item.nome }}</option>
+      </select>
+
+
+      <label for="dataAdmissao">Data de admissão</label>
+      <input formControlName="dataAdmissao" type="date" class="form-control required" id="dataAdmissao" name="dataAdmissao" placeholder="Data de admissão">
+
+      <label for="nomePai">Nome do pai</label>
+      <input formControlName="nomePai" type="text" class="form-control required" id="nomePai" name="nomePai" placeholder="Nome do pai">
+
+      <label for="nomeMae">Nome da mae</label>
+      <input formControlName="nomeMae" type="text" class="form-control required" id="nomeMae" name="nomeMae" placeholder="Nome da mãe">
+
+      <label for="pis">PIS</label>
+      <input formControlName="pis" type="number" class="form-control required" id="pis" name="pis" placeholder="PIS">
+
+      <label for="dataEmissaoPis">Data emissão PIS</label>
+      <input formControlName="dataEmissaoPis" type="date" class="form-control required" id="dataEmissaoPis" name="dataEmissaoPis"
+        placeholder="Data emissão PIS">
+
+      <label for="reservista">Reservista</label>
+      <input formControlName="reservista" type="text" class="form-control required" id="reservista" name="reservista" placeholder="Reservista">
+
+      <label for="categoriaReservista">Categoria reservista</label>
+      <input formControlName="categoriaReservista" type="text" class="form-control required" id="categoriaReservista" name="categoriaReservista"
+        placeholder="Categoria reservista">
+
+      <label for="nacionalidade">Nacionalidade</label>
+      <input formControlName="nacionalidade" type="text" class="form-control required" id="nacionalidade" name="nacionalidade"
+        placeholder="Nacionalidade">
+
+      <label for="naturalidade">Naturalidade</label>
+      <input formControlName="naturalidade" type="text" class="form-control required" id="naturalidade" name="naturalidade" placeholder="Naturalidade">
+
+      <label for="seguroDesemprego">Seguro Desemprego</label>
+      <select name="seguroDesemprego" formControlName="seguroDesemprego" class="form-control">
+        <option value="S">Sim</option>
+        <option value="N">Não</option>
+      </select>
+
+
+
+      <label for="dataDemissao">Data demissão</label>
+      <input formControlName="dataDemissao" type="date" class="form-control required" id="dataDemissao" name="dataDemissao" placeholder="Data demissão">
+
+      <label for="numeroCarteiraTrabalho">Numero Carteira de Trabalho</label>
+      <input formControlName="numeroCarteiraTrabalho" type="text" class="form-control required" id="numeroCarteiraTrabalho" name="numeroCarteiraTrabalho"
+        placeholder="Numero Carteira de Trabalho">
+
+      <label for="serieCarteiraTrabalho">Serie Carteira de Trabalho</label>
+      <input formControlName="serieCarteiraTrabalho" type="text" class="form-control required" id="serieCarteiraTrabalho" name="serieCarteiraTrabalho"
+        placeholder="Serie Carteira de Trabalho">
+
+      <label for="estadoCarteiraTrabalho">Estado Carteira de Trabalho</label>
+      <input formControlName="estadoCarteiraTrabalho" type="text" class="form-control required" id="estadoCarteiraTrabalho" name="estadoCarteiraTrabalho"
+        placeholder="Estado Carteira de Trabalho">
+
+      <label for="dataEmissaoCarteiraTrabalho">Data Emissao Carteira de Trabalho</label>
+      <input formControlName="dataEmissaoCarteiraTrabalho" type="date" class="form-control required" id="dataEmissaoCarteiraTrabalho"
+        name="dataEmissaoCarteiraTrabalho" placeholder="Data Emissao Carteira de Trabalho">
+
+      <label for="cnh">CNH</label>
+      <input formControlName="cnh" type="text" class="form-control required" id="cnh" name="cnh" placeholder="CNH">
+
+      <label for="categoriaCnh">Categoria CNH</label>
+      <input formControlName="categoriaCnh" type="text" class="form-control required" id="categoriaCnh" name="categoriaCnh" placeholder="Categoria CNH">
+
+      <label for="orgaoEmissorCnh">Orgão Emissor CNH</label>
+      <input formControlName="orgaoEmissorCnh" type="text" class="form-control required" id="orgaoEmissorCnh" name="orgaoEmissorCnh"
+        placeholder="Orgão Emissor CNH">
+
+      <label for="dataEmissaoCnh">Data Emissão CNH</label>
+      <input formControlName="dataEmissaoCnh" type="date" class="form-control required" id="dataEmissaoCnh" name="dataEmissaoCnh"
+        placeholder="Data Emissão CNH">
+
+      <label for="dataPrimeiraCnh">Data Primeira Cnh</label>
+      <input formControlName="dataPrimeiraCnh" type="date" class="form-control required" id="dataPrimeiraCnh" name="dataPrimeiraCnh"
+        placeholder="Data Primeira CNH">
+
+      <label for="dataValidadeCnh">Data Validade CNH</label>
+      <input formControlName="dataValidadeCnh" type="date" class="form-control required" id="dataValidadeCnh" name="dataValidadeCnh"
+        placeholder="Data Validade CNH">
+
+      <label for="tituloEleitor">Titulo de Eleitor</label>
+      <input formControlName="tituloEleitor" type="text" class="form-control required" id="tituloEleitor" name="tituloEleitor"
+        placeholder="Titulo de Eleitor">
+
+      <label for="zonaTituloEleitor">Zona Titulo de Eleitor</label>
+      <input formControlName="zonaTituloEleitor" type="text" class="form-control required" id="zonaTituloEleitor" name="zonaTituloEleitor"
+        placeholder="Zona Titulo Eleitor">
+
+      <label for="secaoTituloEleitor">Secao Titulo de Eleitor</label>
+      <input formControlName="secaoTituloEleitor" type="text" class="form-control required" id="secaoTituloEleitor" name="secaoTituloEleitor"
+        placeholder="Secão Titulo Eleitor">
+
+
+    </div>
+    <input type="submit" value="Salvar" />
+  </form>
+</div>

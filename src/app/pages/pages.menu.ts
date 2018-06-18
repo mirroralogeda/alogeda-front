@@ -94,6 +94,22 @@ export const PAGES_MENU = [
                 title: "general.menu.eventos"
               }
             }
+          },
+          {
+            path: "eventosFixos",
+            data: {
+              menu: {
+                title: "Eventos Fixos"
+              }
+            }
+          },
+          {
+            path: "pessoas",
+            data: {
+              menu: {
+                title: "Pessoas"
+              }
+            }
           }
         ]
       },
@@ -144,6 +160,14 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: "general.menu.setores"
+              }
+            }
+          },
+          {
+            path: "funcionarios",
+            data: {
+              menu: {
+                title: "general.menu.funcionarios"
               }
             }
           },
