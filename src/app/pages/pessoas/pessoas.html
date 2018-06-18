@@ -40,8 +40,14 @@
               <input formControlName="telefone" id="telefone" class="form-control required" placeholder="Telefone">
 
               <label for="genero">Genero</label>
-              <input formControlName="genero" id="genero" class="form-control required" placeholder="genero">
+              <select name="genero" formControlName="genero" class="form-control">
+                <option *ngFor="let item of generos" [value]="item.id">{{ item.descricao }}</option>
+              </select>
 
+              <label for="estCivil">Estado Civil</label>
+              <select name="estCivil" formControlName="estCivil" class="form-control">
+                <option *ngFor="let item of estadosCivis" [value]="item.id">{{ item.descricao }}</option>
+              </select>
 
               <div style="margin-top: 10px">
                 <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
@@ -70,7 +76,7 @@
               <tbody>
                 <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
                   <td style="text-align: left">{{item.nome}}</td>
-                  <td style="text-align: left">{{item.genero}}%</td>
+                  <td style="text-align: left">{{item.genero}}</td>
                   <td style="text-align: left">{{item.cpf}}</td>
                   <td style="text-align: left">{{item.telefone}}</td>
                 </tr>

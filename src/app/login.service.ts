@@ -19,9 +19,9 @@ export class LoginService {
         console.log("token", e);
         let token = e.headers.authorization;
         this.setarToken(token);
+        this.verificaLogin();
       }
     );
-    this.verificaLogin();
   }
   public setarToken(token: string) {
     console.log("setar token");
@@ -41,7 +41,7 @@ export class LoginService {
       this.router.navigateByUrl("/login");
     } else if (this.router.url === "/login") {
       console.log("loado");
-      this.router.navigateByUrl("/pages/dashboard");
+      this.router.navigateByUrl("/pages");
     }
   }
   public logout() {

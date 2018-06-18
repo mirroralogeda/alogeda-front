@@ -13,4 +13,12 @@ export class PessoasService {
       });
     });
   }
+
+  getEstadosCivis(callback) {
+    this.hostService.defaultGet("estadoscivis/getall", null, e => {
+      console.log(e);
+      let valores = e.data.result;
+      callback(valores);
+    });
+  }
 }

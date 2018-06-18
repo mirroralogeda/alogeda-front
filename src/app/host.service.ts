@@ -12,11 +12,12 @@ export class HostService {
   constructor(private router: Router) {}
 
   private tratamentoErro(error) {
+    console.log("error", error);
     let erro = error.response;
     console.log(erro);
     if (erro.status >= 500) {
       console.log("erro no servidor");
-    } else if (erro.status == 403) {
+    } else if (erro.status == 401) {
       this.logout();
     }
   }
