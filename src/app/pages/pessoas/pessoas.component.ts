@@ -61,17 +61,23 @@ export class PessoasComponent {
   }
 
   alterar(item) {
-    // item.estCivil = item.estCivil.id;
+    console.log(item)
     delete item.enderecos;
     delete item.curriculoses;
     delete item.funcionarioses;
+    item.dataNascimento = this.dataParaCliente(item.dataNascimento);
+    item.dataEmissãoRg = this.dataParaCliente(item.dataEmissãoRg);
+    item.estCivil = item.estCivil.id;
     this.form.setValue(item);
     this.insercao = !this.insercao;
   }
 
   public onSubmit(item) {
     let data = this.form.value;
+    data.dataNascimento = this.dataParaServidor(data.dataNascimento);
+    data.dataEmissãoRg = this.dataParaServidor(data.dataEmissãoRg);
     data.estCivil = { id: data.estCivil };
+    console.log("essa inutilidade", data);
     this.hostService.defaultPost("pessoas/save", data, ret => {
       if (ret.status === 200) {
         this.insercao = false;
@@ -92,6 +98,7 @@ export class PessoasComponent {
   protected delete() {
     this.hostService.defaultPost("pessoas/delete", this.form.value, ret => {
       console.log(ret);
+      this.limpaForm();
     });
   }
   protected BuscarEstadosCivis() {
@@ -104,5 +111,31 @@ export class PessoasComponent {
 
   ngOnInit() {
     this.BuscarEstadosCivis();
+  }
+
+  dataParaServidor(dataCliente) {
+    if (!dataCliente) {
+      return null;
+    }
+    return (
+      dataCliente.substr(8, 2) +
+      "/" +
+      dataCliente.substr(5, 2) +
+      "/" +
+      dataCliente.substr(0, 4) +
+      " 00:00:00"
+    );
+  }
+  dataParaCliente(dataServidor) {
+    if (!dataServidor) {
+      return "";
+    }
+    return (
+      dataServidor.substr(6, 4) +
+      "-" +
+      dataServidor.substr(3, 2) +
+      "-" +
+      dataServidor.substr(0, 2)
+    );
   }
 }

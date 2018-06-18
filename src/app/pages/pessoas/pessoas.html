@@ -13,13 +13,15 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
 
-
-
               <label for="nome">Nome</label>
               <input formControlName="nome" id="nome" class="form-control required" placeholder="Nome">
 
-              <label for="nome">CPF</label>
+              <label for="CPF">CPF</label>
               <input formControlName="cpf" id="CPF" class="form-control required" placeholder="CPF">
+
+              <label for="dataNascimento">Data emissão PIS</label>
+              <input formControlName="dataNascimento" type="date" class="form-control required" id="dataNascimento" name="dataNascimento"
+                placeholder="Data de Nascimento">
 
               <label for="rg">CPF</label>
               <input formControlName="rg" class="form-control required" placeholder="rg">
@@ -31,7 +33,7 @@
               <input formControlName="estadoEmissorRg" id="estadoEmissorRg" class="form-control required" placeholder="Estado Emissor Rg">
 
               <label for="dataEmissãoRg">Data Emissão Rg</label>
-              <input formControlName="dataEmissãoRg" id="dataEmissãoRg" class="form-control required" placeholder="Data Emissão RG">
+              <input type="date" formControlName="dataEmissãoRg" id="dataEmissãoRg" class="form-control required" placeholder="Data Emissão RG">
 
               <label for="email">Email</label>
               <input formControlName="email" id="email" class="form-control required" placeholder="Email">
