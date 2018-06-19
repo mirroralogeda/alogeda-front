@@ -1,48 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
-
-import { Observable } from 'rxjs/Rx';
-
+import { HostService } from "../../host.service";
 import { Cidades } from './cidades.model';
 import { Resposta } from './resposta.model';
 
 @Injectable()
 export class CidadesService {
-  url = "http://localhost:8080/api/cidades/getall";
-
-  constructor(private http: Http) {
-
-  }
-
-  // getAllActors retorna um Observable
-  getAllCidades() {
-    return this.http.get(this.url).map(res => {
-      console.log(res.json());
-      return res.json();
+  constructor(private hostService: HostService) {}
+  
+  getAllCidades(callback: Function) {
+    this.hostService.defaultGet("cidades/getall", {}, retorno => {
+      callback(retorno.data.result);
     });
   }
 
-  getDataTable(data) {
-    console.log(data);
-
-    let result = data.result.map(item => item.nome);
-    console.log(result);
-    return result;
-
+  save(cidades: any, callback: Function) {
+    this.hostService.defaultPost("cidades/save", cidades, ret => {
+      callback(ret);
+    });
   }
 
-  // Save retorna um Observable
-//   save(actor: Actor) {
-//     return this.http.post(this.url, actor)
-//       .map(res => res.json())
-//       .catch(this.handleError);
-//   }
+  delete(cidades: any, callback: Function) {
+    console.log(cidades);
+    this.hostService.defaultPost("cidades/delete", cidades, callback);
+  }
 
-//   private handleError(error: any) {
-//     return Observable.throw(error);
-//   }
 }

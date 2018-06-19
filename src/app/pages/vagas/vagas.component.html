@@ -1,0 +1,126 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-12">
+
+
+        <div class="col-md-12 col-sm-12" *ngIf="insert">
+            <ba-card>
+              <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <div class="form-group col-md-12">
+    
+                  <label for="data_inicio">Data Início</label>
+                  <input formControlName="data_inicio" type="text" class="form-control required" id="descricao" name="descricao" placeholder="Data Início">
+    
+                  <label for="data_fim">Data Fim</label>
+                  <select name="data_fim" formControlName="tipo" class="form-control">
+                    <option></option>
+                    <option *ngFor="let item of tipos" [value]="item">{{ item }}</option>
+                  </select>
+    
+                  <label for="quantidade">Quantidade</label>
+                  <input formControlName="quantidade" type="number" class="form-control required" id="automatico" name="automatico" placeholder="Automatico">
+    
+                  <label for="desc_geral">Descrição Geral</label>
+                  <input formControlName="desc_geral" type="text" class="form-control required" id="formula" name="formula" placeholder="Formula">
+    
+                  <label for="cargos_id">Cargo Correspondente</label>
+                  <select name="cargos_id" formControlName="cargos_id" class="form-control">
+                    <option *ngFor="let item of cargos" [value]="item.id" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
+                  </select>
+    
+                  <label for="tipo_liberacao">Tipo de Liberação</label>
+                  <input formControlName="tipo_liberacao" type="number" class="form-control required" id="percentual" name="percentual" placeholder="Percentual">
+    
+                  <div style="margin-top: 10px">
+                    <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                    <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
+                    <button (click)="delete()" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+                  </div>
+                </div>
+              </form>
+            </ba-card>
+          </div>
+
+          <div *ngIf="!insert">
+              <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
+              <div class="col-md-11 col-sm-11">
+                <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr class="black-muted-bg">
+                        <th style="text-align: left">Data Início</th>
+                        <th style="text-align: left">Data Fim</th>
+                        <th style="text-align: left">Quantidade</th>
+                        <th style="text-align: left">Cargo</th>
+                        <th style="text-align: left">Tipo Liberação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
+                        <td style="text-align: left">{{item.data_inicio}}</td>
+                        <td style="text-align: left">{{item.data_fim}}</td>
+                        <td style="text-align: left">{{item.quantidade}}</td>
+                        <td style="text-align: left">{{item.cargos}}%</td>
+                        <td style="text-align: left">{{item.tipo_liberacao}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ba-card>
+              </div>
+            </div>
+      <!-- <div class=row>
+        <div class="col-md-6 col-sm-12">
+          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+            <table class="table table-hover">
+              <thead>
+                <tr class="black-muted-bg">
+                  <th style="text-align: left">Data Início</th>
+                  <th style="text-align: left">Data Fim</th>
+                  <th style="text-align: left">Quantidade</th>
+                  <th style="text-align: left">Descrição Geral</th>
+                  <th style="text-align: left">Cargos</th>
+                  <th style="text-align: left">Tipo Liberação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of cargos" class="no-top-border">
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.data_inicio}}</td>
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.data_fim}}</td>
+                  <td (click)="setCargo(item)" style="text-align: left">{{item.desc_geral}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ba-card>
+        </div>
+
+
+        <div class="col-md-6 col-sm-12">
+          <ba-card cardTitle="" baCardClass="with-scroll">
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+              <div class="form-group col-md-12">
+
+                <label for="input01">Nome</label>
+                <input [formControl]="nome" type="text" class="form-control required" id="nome" name="nome" placeholder="">
+
+                <label for="input01">Cargo</label>
+                <select [formControl]="cargos_id" class="form-control">
+                  <option></option>
+                  <option *ngFor="let cargo of cargos" [value]="cargo.id">{{cargo.id +' - '+ cargo.nome}}</option>
+                </select>
+
+
+                <div style="margin-top: 10px">
+                  <button *ngIf="insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                  <button *ngIf="!insert" (click)="setNovo()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar / Novo</button>
+                  <button *ngIf="!insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
+                  <button *ngIf="!insert" (click)="onDelete(form.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+                </div>
+              </div>
+            </form>
+          </ba-card>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</div>

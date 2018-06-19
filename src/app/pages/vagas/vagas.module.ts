@@ -3,24 +3,22 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { CidadesComponent } from './cidades.component';
-import { routing } from './cidades.routing';
+import { VagasComponent } from './vagas.component';
+import { routing } from './vagas.routing';
 
 import { NgaModule } from '../../theme/nga.module';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SmartTableModule,
     routing,
-    HttpModule,
-    NgaModule
+    NgaModule,
+    HttpModule
   ],
   declarations: [
-    CidadesComponent
+    VagasComponent
   ]
 })
-export class CidadesModule {}
+export class VagasModule {}

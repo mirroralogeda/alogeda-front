@@ -2,17 +2,52 @@
   <div class="row">
   
     <div class="col-md-12">
-  
-      <ba-card cardTitle="" baCardClass="with-scroll">
-        <form>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <ng2-smart-table [settings]="settingsTable" [source]="sourceTable" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+        <div class=row>
+            <div class="col-md-6 col-sm-12">
+              <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="black-muted-bg">
+                      <th style="text-align: left">Nome da Cidade</th>
+                      <th style="text-align: left">UF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of resposta" class="no-top-border">
+                      <td (click)="setCidade(item)" style="text-align: left">{{item.nome}}</td>
+                      <td (click)="setCidade(item)" style="text-align: left">{{item.uf}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ba-card>
+            </div>
+    
+    
+            <div class="col-md-6 col-sm-12">
+              <ba-card cardTitle="" baCardClass="with-scroll">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                  <div class="form-group col-md-12">
+                    <label for="input01">Nome da Cidade</label>
+    
+                    <input formControlName="nome" type="text" class="form-control required" id="nome" name="nome" placeholder="">
+    
+                    <label for="input01">UF</label>
+                    <select [formControl]="uf" class="form-control">
+                      <option></option>
+                      <option *ngFor="let uf of cidadesUf" [value]="uf.Sigla">{{uf.Estado + ' - ' + uf.Sigla}}</option>
+                    </select>
+
+                    <div style="margin-top: 10px">
+                      <button *ngIf="insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                      <button *ngIf="!insert" (click)="setNovo()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
+                      <button *ngIf="!insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
+                      <button *ngIf="!insert" (click)="onDelete(form.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+                    </div>
+                  </div>
+                </form>
+              </ba-card>
             </div>
           </div>
-        </form>
-      </ba-card>
-    </div>
   
   </div>
 </div>
