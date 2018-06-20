@@ -14,7 +14,7 @@ import { Jsonp } from '@angular/http';
 export class TabSalFamiliaComponent implements OnInit {
   edicao: boolean = false;
   data: TabSalFamilia[];
-  tabSelecionada: TabSalFamilia;
+  tabSelecionada: TabSalFamilia = new TabSalFamilia();
   faixasRemover: Faixa[] = [];
 
   constructor(private activeModal: NgbModal,
@@ -29,10 +29,9 @@ export class TabSalFamiliaComponent implements OnInit {
   loadData() {
     this.service.getData().then(data => {
       this.data = data;
-      this.tabSelecionada = this.service.getVigente(this.data);
+      this.tabSelecionada = this.getVigente();
     });
   }
-
 
   addLinha() {
     this.tabSelecionada.faixas.push(new Faixa());
@@ -53,24 +52,28 @@ export class TabSalFamiliaComponent implements OnInit {
 
   cancela() {
     this.faixasRemover = [];
-    this.tabSelecionada = this.service.getVigente(this.data);
+    this.tabSelecionada = this.getVigente();
     this.edicao = false;
   }
 
-  parseDate(dateString: string): Date {
-    if (dateString) {
-      return new Date(dateString);
-    } else {
-      return null;
-    }
+  parseDate(dateString: string): String {
+    return new Date(dateString).toLocaleDateString();
   }
 
   async submit() {
-    await Promise.all(this.faixasRemover.filter(f => f.id > 0).map(f => this.service.delete(f)));
+    await this.service.delete(this.faixasRemover.filter(f => f.id > 0));
     this.faixasRemover = [];
     await this.service.salva(this.tabSelecionada);
     this.edicao = false;
     this.loadData();
+  }
+
+  selecionaTab(index) {
+    this.tabSelecionada = this.data[index];
+  }
+
+  getVigente(): TabSalFamilia {
+    return this.data.slice(-1)[0];
   }
 
 }

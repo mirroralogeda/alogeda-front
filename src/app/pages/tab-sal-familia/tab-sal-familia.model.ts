@@ -1,6 +1,6 @@
 export class TabSalFamilia {
-  constructor(public perInicial: Date = null,
-    public perFinal: Date = null,
+  constructor(public perInicial: String = null,
+    public perFinal: String = null,
     public faixas: Faixa[] = []) {
 
   }
