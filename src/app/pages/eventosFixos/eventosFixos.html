@@ -13,45 +13,27 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
 
-              <label for="descricao">Descrição</label>
-              <input formControlName="descricao" type="text" class="form-control required" id="descricao" name="descricao" placeholder="Descrição">
-
-              <label for="tipo">Tipo</label>
-              <select name="tipo" formControlName="tipo" class="form-control">
+              <label for="funcionario">Funcionario</label>
+              <select name="funcionario" formControlName="funcionario" class="form-control">
                 <option></option>
-                <option *ngFor="let item of tipos" [value]="item">{{ item }}</option>
+                <option *ngFor="let item of funcionarios" [value]="item">{{ item.pessoas.nome }}</option>
               </select>
 
-              <label for="automatico">Automatico</label>
-              <input formControlName="automatico" type="number" class="form-control required" id="automatico" name="automatico" placeholder="Automatico">
-
-              <label for="formula">Formula</label>
-              <input formControlName="formula" type="text" class="form-control required" id="formula" name="formula" placeholder="Formula">
-
-              <label for="ordemCalculo">Ordem Calculo</label>
-              <input formControlName="ordemCalculo" type="number" class="form-control required" id="ordemCalculo" name="ordemCalculo" placeholder="Ordem do Calculo">
-
-              <label for="percentual">Percentual</label>
-              <input formControlName="percentual" type="number" class="form-control required" id="percentual" name="percentual" placeholder="Percentual">
-
-              <label for="referencia">Referencia</label>
-              <input formControlName="referencia" type="number" class="form-control required" id="referencia" name="referencia" placeholder="Referencia">
-
-              <label for="valorMaximo">Valor Maximo</label>
-              <input formControlName="valorMaximo" type="number" class="form-control required" id="valorMaximo" name="valorMaximo" placeholder="Valor Maximo">
-
-              <label for="valorMinimo">Valor Minimo</label>
-              <input formControlName="valorMinimo" type="number" class="form-control required" id="valorMinimo" name="valorMinimo" placeholder="Valor Minimo">
-
-              <label for="grupoEventos">Grupos</label>
-              <select name="grupoEventos" formControlName="grupoEventos" class="form-control">
-                <option *ngFor="let item of gruposEventos" [value]="item.id" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
+              <label for="evento">Evento</label>
+              <select name="evento" formControlName="evento" class="form-control">
+                <option *ngFor="let item of eventos" [value]="item">{{ item.descricao }}</option>
               </select>
 
-              <div style="margin-top: 10px">
-                <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
-                <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
-                <button (click)="delete()" class="btn btn-success pull-right" style="margin-left: 6px">Deletar</button>
+              <label for="perInicial">Periodo Inicial</label>
+              <input formControlName="perInicial" type="date" class="form-control required" id="perInicial" name="perInicial" placeholder="Periodo Inicial">
+
+              <label for="perFinal">Periodo Final</label>
+              <input formControlName="perFinal" type="date" class="form-control required" id="perFinal" name="perFinal" placeholder="Periodo Final">
+
+              <div style="margin-top: 10px ">
+                <button type="submit " class="btn btn-warning pull-right " style="margin-left: 6px ">Salvar</button>
+                <button (click)="limpaForm() " class="btn btn-success pull-right " style="margin-left: 6px ">Cancelar</button>
+                <button (click)="delete() " class="btn btn-success pull-right " style="margin-left: 6px ">Deletar</button>
               </div>
             </div>
           </form>
@@ -59,23 +41,27 @@
       </div>
 
 
-      <div *ngIf="!insercao">
-        <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
-        <div class="col-md-11 col-sm-11">
-          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
-            <table class="table table-hover">
+      <div *ngIf="!insercao ">
+        <button (click)="addNovo() " class="btn btn-success pull-right col-md-1 col-sm-1 " style="margin-left: 6px ">Novo</button>
+        <div class="col-md-11 col-sm-11 ">
+          <ba-card cardTitle=" " baCardClass="with-scroll table-panel ">
+            <table class="table table-hover ">
               <thead>
-                <tr class="black-muted-bg">
-                  <th style="text-align: left">Descrição</th>
-                  <th style="text-align: left">Percentual</th>
-                  <th style="text-align: left">Tipo</th>
+                <tr class="black-muted-bg ">
+                  <th style="text-align: left ">Descrição</th>
+                  <th style="text-align: left ">Percentual</th>
+                  <th style="text-align: left ">Funcionario</th>
+                  <th style="text-align: left ">Periodo Inicial</th>
+                  <th style="text-align: left ">Periodo Final</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
-                  <td style="text-align: left">{{item.descricao}}</td>
-                  <td style="text-align: left">{{item.percentual}}%</td>
-                  <td style="text-align: left">{{item.tipo}}</td>
+                <tr *ngFor="let item of data " class="no-top-border " (click)="alterar(item) ">
+                  <td style="text-align: left ">{{item.eventos.descricao}}</td>
+                  <td style="text-align: left ">{{item.eventos.percentual}}%</td>
+                  <td style="text-align: left ">{{item.funcionario.nome}}</td>
+                  <td style="text-align: left ">{{item.perInicial}}</td>
+                  <td style="text-align: left ">{{item.perFinal}}</td>
                 </tr>
               </tbody>
             </table>

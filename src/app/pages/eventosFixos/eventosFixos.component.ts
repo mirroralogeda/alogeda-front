@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { EventosFixosService } from "./eventosFixos.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
   FormControl,
   FormGroup,
@@ -15,66 +14,66 @@ import { HostService } from "../../host.service";
   templateUrl: "./eventosFixos.html",
   styleUrls: ["./eventosFixos.scss"]
 })
-export class EventosFixosComponent {
+export class EventosFixosComponent implements OnInit {
   insercao: boolean = false;
-  data;
-  gruposEventos;
-  veioGrupos = false;
-  tipos = ["NEUTRO", "PROVENTO", "DESCONTO"];
+  data = [];
+  funcionarios = [];
+  eventos = [];
 
   form = new FormBuilder().group({
     id: new FormControl(),
-    grupoEventos: new FormControl(),
-    descricao: new FormControl(),
-    tipo: new FormControl(),
-    formula: new FormControl(),
-    automatico: new FormControl(),
-    referencia: new FormControl(),
-    percentual: new FormControl(),
-    valorMinimo: new FormControl(),
-    valorMaximo: new FormControl(),
-    incidencias: new FormControl(),
-    ordemCalculo: new FormControl(),
-    eveFixoses: new FormControl(),
-    calculoses: new FormControl()
+    eventos: new FormControl(),
+    funcionarios: new FormControl(),
+    perInicial: new FormControl(),
+    perFinal: new FormControl()
   });
 
-  constructor(
-    private gruposEventosService: GrupoEventosService,
-    private service: EventosFixosService,
-    private modalService: NgbModal,
-    fb: FormBuilder,
-    private hostService: HostService
-  ) {
-    this.service.getData().then(data => {
-      this.data = data;
-    });
-
-    this.gruposEventosService.getAllGrupoEventos(retorno => {
-      this.veioGrupos = true;
-      this.gruposEventos = retorno;
-    });
+  ngOnInit() {
+    this.buscarEventosFixos();
   }
 
+  buscarEventosFixos() {
+    this.hostService.defaultGet('eventosfixos/getall', {}, retorno => {
+      this.data = retorno;
+    })
+  }
+
+  buscarFuncionarios() {
+    this.hostService.defaultGet('funcionarios/getall', {}, retorno => {
+      this.funcionarios = retorno;
+    })
+  }
+
+  buscarEventos() {
+    this.hostService.defaultGet('eventos/getall', {}, retorno => {
+      this.eventos = retorno;
+    })
+  }
+
+  constructor(
+    private service: EventosFixosService,
+    private hostService: HostService
+  ) { }
+
   alterar(item) {
+    this.buscarEventos();
+    this.buscarFuncionarios();
+    item.perFinal = this.dataParaCliente(item.perFinal)
+    item.perInicial = this.dataParaCliente(item.perInicial)
     this.form.setValue(item);
     this.insercao = !this.insercao;
   }
 
   public onSubmit(item) {
     let data = this.form.value;
-    data.grupoEventos = { id: parseInt(data.grupoEventos) };
-    this.hostService.defaultPost("eventos/save", this.form.value, ret => {
+    data.perInicial = this.dataParaServidor(data.perInicial);
+    data.perFinal = this.dataParaServidor(data.perFinal);
+    this.hostService.defaultPost("eventosFixos/save", this.form.value, ret => {
       if (ret.status === 200) {
         this.insercao = false;
         this.form.reset();
       }
     });
-  }
-  protected addGrupoEvento(item) {
-    // let dados = this.form.value;
-    // dados.grupoEventos = { id: item };
-    // this.form.setValue(dados);
   }
 
   protected addNovo() {
@@ -87,13 +86,38 @@ export class EventosFixosComponent {
   }
 
   protected delete() {
-    this.hostService.defaultPost("eventos/delete", this.form.value, ret => {
+    this.hostService.defaultPost("eventosfixos/delete", this.form.value, ret => {
       console.log(ret);
     });
   }
-  public setNovo() {}
-  public onDelete(item) {}
-  formatarGrupo(item) {
-    if (item) return item.id + " - " + item.descricao + "";
+  public setNovo() { }
+  public onDelete(item) { }
+
+
+  dataParaServidor(dataCliente) {
+    if (!dataCliente) {
+      return null;
+    }
+    return (
+      dataCliente.substr(8, 2) +
+      "/" +
+      dataCliente.substr(5, 2) +
+      "/" +
+      dataCliente.substr(0, 4) +
+      " 00:00:00"
+    );
+  }
+
+  dataParaCliente(dataServidor) {
+    if (!dataServidor) {
+      return "";
+    }
+    return (
+      dataServidor.substr(6, 4) +
+      "-" +
+      dataServidor.substr(3, 2) +
+      "-" +
+      dataServidor.substr(0, 2)
+    );
   }
 }
