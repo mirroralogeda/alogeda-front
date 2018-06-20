@@ -1,56 +1,37 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
-
-
-
-
-
-
-
       <div class="col-md-12 col-sm-12" *ngIf="insercao">
         <ba-card>
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
-
               <label for="nome">Nome</label>
-              <input formControlName="nome" id="nome" class="form-control required" placeholder="Nome">
-
+              <input formControlName="nome" id="nome" class="form-control required col-md-12" placeholder="Nome">
               <label for="CPF">CPF</label>
-              <input formControlName="cpf" id="CPF" class="form-control required" placeholder="CPF">
-
-              <label for="dataNascimento">Data emissão PIS</label>
-              <input formControlName="dataNascimento" type="date" class="form-control required" id="dataNascimento" name="dataNascimento"
+              <input formControlName="cpf" id="CPF" class="form-control required col-md-6" placeholder="CPF">
+              <label for="dataNascimento">Data de Nascimento</label>
+              <input formControlName="dataNascimento" type="date" class="form-control required col-md-6" id="dataNascimento" name="dataNascimento"
                 placeholder="Data de Nascimento">
-
-              <label for="rg">CPF</label>
-              <input formControlName="rg" class="form-control required" placeholder="rg">
-
+              <label for="rg">RG</label>
+              <input formControlName="rg" class="form-control required col-md-4" placeholder="rg">
               <label for="orgaoEmissorRg">Orgao Emissor RG</label>
-              <input formControlName="orgaoEmissorRg" id="orgaoEmissorRg" class="form-control required" placeholder="Orgao Emissor Rg">
-
+              <input formControlName="orgaoEmissorRg" id="orgaoEmissorRg" class="form-control required col-md-3" placeholder="Orgao Emissor Rg">
               <label for="estadoEmissorRg">Estado Emissor Rg</label>
-              <input formControlName="estadoEmissorRg" id="estadoEmissorRg" class="form-control required" placeholder="Estado Emissor Rg">
-
+              <input formControlName="estadoEmissorRg" id="estadoEmissorRg" class="form-control required col-md-2" placeholder="Estado Emissor Rg">
               <label for="dataEmissãoRg">Data Emissão Rg</label>
-              <input type="date" formControlName="dataEmissãoRg" id="dataEmissãoRg" class="form-control required" placeholder="Data Emissão RG">
-
+              <input type="date" formControlName="dataEmissãoRg" id="dataEmissãoRg" class="form-control required col-md-3" placeholder="Data Emissão RG">
               <label for="email">Email</label>
-              <input formControlName="email" id="email" class="form-control required" placeholder="Email">
-
+              <input formControlName="email" id="email" class="form-control required col-md-8" placeholder="Email">
               <label for="telefone">Telefone</label>
-              <input formControlName="telefone" id="telefone" class="form-control required" placeholder="Telefone">
-
+              <input formControlName="telefone" id="telefone" class="form-control required col-md-4" placeholder="Telefone">
               <label for="genero">Genero</label>
-              <select name="genero" formControlName="genero" class="form-control">
+              <select name="genero" formControlName="genero" class="form-control col-md-6">
                 <option *ngFor="let item of generos" [value]="item.id">{{ item.descricao }}</option>
               </select>
-
               <label for="estCivil">Estado Civil</label>
-              <select name="estCivil" formControlName="estCivil" class="form-control">
+              <select name="estCivil" formControlName="estCivil" class="form-control col-md-6">
                 <option *ngFor="let item of estadosCivis" [value]="item.id">{{ item.descricao }}</option>
               </select>
-
               <div style="margin-top: 10px">
                 <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                 <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
@@ -59,8 +40,6 @@
           </form>
         </ba-card>
       </div>
-
-
       <div *ngIf="!insercao">
         <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
         <div class="col-md-11 col-sm-11">
@@ -87,11 +66,6 @@
           </ba-card>
         </div>
       </div>
-
-
-
-
-
     </div>
   </div>
 </div>
