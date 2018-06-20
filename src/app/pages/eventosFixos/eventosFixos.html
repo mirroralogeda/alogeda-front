@@ -5,55 +5,50 @@
         <ba-card>
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
-
               <label for="funcionario">Funcionario</label>
               <select name="funcionario" formControlName="funcionario" class="form-control">
                 <option></option>
                 <option *ngFor="let item of funcionarios" [value]="item">{{ item.pessoas.nome }}</option>
               </select>
-
               <label for="evento">Evento</label>
               <select name="evento" formControlName="evento" class="form-control">
                 <option *ngFor="let item of eventos" [value]="item">{{ item.descricao }}</option>
               </select>
-
               <label for="perInicial">Periodo Inicial</label>
               <input formControlName="perInicial" type="date" class="form-control required col-md-6" id="perInicial" name="perInicial"
                 placeholder="Periodo Inicial">
-
               <label for="perFinal">Periodo Final</label>
               <input formControlName="perFinal" type="date" class="form-control required col-md-6" id="perFinal" name="perFinal" placeholder="Periodo Final">
-
-              <div style="margin-top: 10px ">
-                <button type="submit " class="btn btn-warning pull-right " style="margin-left: 6px ">Salvar</button>
-                <button (click)="limpaForm() " class="btn btn-success pull-right " style="margin-left: 6px ">Cancelar</button>
-                <button (click)="delete() " class="btn btn-success pull-right " style="margin-left: 6px ">Deletar</button>
+              <div style="margin-top: 10px">
+                <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
+                <button (click)="delete()" class="btn btn-success pull-right" style="margin-left: 6px">Deletar</button>
               </div>
             </div>
           </form>
         </ba-card>
       </div>
-      <div *ngIf="!insercao ">
-        <button (click)="addNovo() " class="btn btn-success pull-right col-md-1 col-sm-1 " style="margin-left: 6px ">Novo</button>
-        <div class="col-md-11 col-sm-11 ">
-          <ba-card cardTitle=" Eventos Fixos" baCardClass="with-scroll table-panel ">
-            <table class="table table-hover ">
+      <div *ngIf="!insercao">
+        <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
+        <div class="col-md-11 col-sm-11">
+          <ba-card cardTitle="Eventos Fixos" baCardClass="with-scroll table-panel">
+            <table class="table table-hover">
               <thead>
-                <tr class="black-muted-bg ">
-                  <th style="text-align: left ">Descrição</th>
-                  <th style="text-align: left ">Percentual</th>
-                  <th style="text-align: left ">Funcionario</th>
-                  <th style="text-align: left ">Periodo Inicial</th>
-                  <th style="text-align: left ">Periodo Final</th>
+                <tr class="black-muted-bg">
+                  <th>Descrição</th>
+                  <th>Percentual</th>
+                  <th>Funcionario</th>
+                  <th>Periodo Inicial</th>
+                  <th>Periodo Final</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of data " class="no-top-border " (click)="alterar(item) ">
-                  <td style="text-align: left ">{{item.eventos.descricao}}</td>
-                  <td style="text-align: left ">{{item.eventos.percentual}}%</td>
-                  <td style="text-align: left ">{{item.funcionario.nome}}</td>
-                  <td style="text-align: left ">{{item.perInicial}}</td>
-                  <td style="text-align: left ">{{item.perFinal}}</td>
+                <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
+                  <td>{{item.eventos.descricao}}</td>
+                  <td>{{item.eventos.percentual}}%</td>
+                  <td>{{item.funcionario.nome}}</td>
+                  <td>{{item.perInicial}}</td>
+                  <td>{{item.perFinal}}</td>
                 </tr>
               </tbody>
             </table>

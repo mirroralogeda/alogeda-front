@@ -5,48 +5,37 @@
         <ba-card>
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
-
               <label for="descricao">Descrição</label>
               <input formControlName="descricao" type="text" class="form-control required col-md-12" id="descricao" name="descricao" placeholder="Descrição">
-
               <label for="tipo">Tipo</label>
               <select name="tipo" formControlName="tipo" class="form-control col-md-4">
                 <option></option>
                 <option *ngFor="let item of tipos" [value]="item">{{ item }}</option>
               </select>
-
               <label for="automatico">Automatico</label>
               <input formControlName="automatico" type="number" class="form-control required col-md-2" id="automatico" name="automatico"
                 placeholder="Automatico">
-
               <label for="ordemCalculo">Ordem Calculo</label>
               <input formControlName="ordemCalculo" type="number" class="form-control required col-md-2" id="ordemCalculo" name="ordemCalculo"
                 placeholder="Ordem do Calculo">
-
               <label for="percentual">Percentual</label>
               <input formControlName="percentual" type="number" class="form-control required col-md-2" id="percentual" name="percentual"
                 placeholder="Percentual">
-
               <label for="formula">Formula</label>
               <input formControlName="formula" type="text" class="form-control required col-md-12" id="formula" name="formula" placeholder="Formula">
-
               <label for="referencia">Referencia</label>
               <input formControlName="referencia" type="number" class="form-control required col-md-12" id="referencia" name="referencia"
                 placeholder="Referencia">
-
               <label for="valorMaximo">Valor Maximo</label>
               <input formControlName="valorMaximo" type="number" class="form-control required col-md-3" id="valorMaximo" name="valorMaximo"
                 placeholder="Valor Maximo">
-
               <label for="valorMinimo">Valor Minimo</label>
               <input formControlName="valorMinimo" type="number" class="form-control required col-md-3" id="valorMinimo" name="valorMinimo"
                 placeholder="Valor Minimo">
-
               <label for="grupoEventos">Grupos</label>
               <select name="grupoEventos" formControlName="grupoEventos" class="form-control col-md-12">
                 <option *ngFor="let item of gruposEventos" [value]="item.id" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
               </select>
-
               <div style="margin-top: 10px">
                 <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                 <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
