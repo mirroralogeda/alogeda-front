@@ -57,7 +57,7 @@
 
       <div *ngIf="!edicao && tabSelecionada">
         <ul>
-          <li *ngFor="let tab of data; let i = index" (click)="selecionaTab(i)">{{parseDate(tab.perInicial)}} até {{parseDate(tab.perFinal)}}</li>
+          <li style="cursor: pointer" *ngFor="let tab of data; let i = index" (click)="selecionaTab(i)">{{parseDate(tab.perInicial)}} até {{parseDate(tab.perFinal)}}</li>
         </ul>
       </div>
 

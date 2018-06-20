@@ -57,7 +57,10 @@ export class TabSalFamiliaComponent implements OnInit {
   }
 
   parseDate(dateString: string): String {
-    return new Date(dateString).toLocaleDateString();
+    if (dateString)
+      return new Date(dateString).toLocaleDateString();
+
+    return null;
   }
 
   async submit() {
