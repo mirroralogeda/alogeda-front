@@ -1,50 +1,49 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
-
-
-
-
-
-
-
       <div class="col-md-12 col-sm-12" *ngIf="insercao">
         <ba-card>
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
 
               <label for="descricao">Descrição</label>
-              <input formControlName="descricao" type="text" class="form-control required" id="descricao" name="descricao" placeholder="Descrição">
+              <input formControlName="descricao" type="text" class="form-control required col-md-12" id="descricao" name="descricao" placeholder="Descrição">
 
               <label for="tipo">Tipo</label>
-              <select name="tipo" formControlName="tipo" class="form-control">
+              <select name="tipo" formControlName="tipo" class="form-control col-md-4">
                 <option></option>
                 <option *ngFor="let item of tipos" [value]="item">{{ item }}</option>
               </select>
 
               <label for="automatico">Automatico</label>
-              <input formControlName="automatico" type="number" class="form-control required" id="automatico" name="automatico" placeholder="Automatico">
-
-              <label for="formula">Formula</label>
-              <input formControlName="formula" type="text" class="form-control required" id="formula" name="formula" placeholder="Formula">
+              <input formControlName="automatico" type="number" class="form-control required col-md-2" id="automatico" name="automatico"
+                placeholder="Automatico">
 
               <label for="ordemCalculo">Ordem Calculo</label>
-              <input formControlName="ordemCalculo" type="number" class="form-control required" id="ordemCalculo" name="ordemCalculo" placeholder="Ordem do Calculo">
+              <input formControlName="ordemCalculo" type="number" class="form-control required col-md-2" id="ordemCalculo" name="ordemCalculo"
+                placeholder="Ordem do Calculo">
 
               <label for="percentual">Percentual</label>
-              <input formControlName="percentual" type="number" class="form-control required" id="percentual" name="percentual" placeholder="Percentual">
+              <input formControlName="percentual" type="number" class="form-control required col-md-2" id="percentual" name="percentual"
+                placeholder="Percentual">
+
+              <label for="formula">Formula</label>
+              <input formControlName="formula" type="text" class="form-control required col-md-12" id="formula" name="formula" placeholder="Formula">
 
               <label for="referencia">Referencia</label>
-              <input formControlName="referencia" type="number" class="form-control required" id="referencia" name="referencia" placeholder="Referencia">
+              <input formControlName="referencia" type="number" class="form-control required col-md-12" id="referencia" name="referencia"
+                placeholder="Referencia">
 
               <label for="valorMaximo">Valor Maximo</label>
-              <input formControlName="valorMaximo" type="number" class="form-control required" id="valorMaximo" name="valorMaximo" placeholder="Valor Maximo">
+              <input formControlName="valorMaximo" type="number" class="form-control required col-md-3" id="valorMaximo" name="valorMaximo"
+                placeholder="Valor Maximo">
 
               <label for="valorMinimo">Valor Minimo</label>
-              <input formControlName="valorMinimo" type="number" class="form-control required" id="valorMinimo" name="valorMinimo" placeholder="Valor Minimo">
+              <input formControlName="valorMinimo" type="number" class="form-control required col-md-3" id="valorMinimo" name="valorMinimo"
+                placeholder="Valor Minimo">
 
               <label for="grupoEventos">Grupos</label>
-              <select name="grupoEventos" formControlName="grupoEventos" class="form-control">
+              <select name="grupoEventos" formControlName="grupoEventos" class="form-control col-md-12">
                 <option *ngFor="let item of gruposEventos" [value]="item.id" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
               </select>
 
@@ -57,8 +56,6 @@
           </form>
         </ba-card>
       </div>
-
-
       <div *ngIf="!insercao">
         <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
         <div class="col-md-11 col-sm-11">
@@ -82,11 +79,6 @@
           </ba-card>
         </div>
       </div>
-
-
-
-
-
     </div>
   </div>
 </div>

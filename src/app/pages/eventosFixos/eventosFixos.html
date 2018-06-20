@@ -1,13 +1,6 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
-
-
-
-
-
-
-
       <div class="col-md-12 col-sm-12" *ngIf="insercao">
         <ba-card>
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
@@ -25,10 +18,11 @@
               </select>
 
               <label for="perInicial">Periodo Inicial</label>
-              <input formControlName="perInicial" type="date" class="form-control required" id="perInicial" name="perInicial" placeholder="Periodo Inicial">
+              <input formControlName="perInicial" type="date" class="form-control required col-md-6" id="perInicial" name="perInicial"
+                placeholder="Periodo Inicial">
 
               <label for="perFinal">Periodo Final</label>
-              <input formControlName="perFinal" type="date" class="form-control required" id="perFinal" name="perFinal" placeholder="Periodo Final">
+              <input formControlName="perFinal" type="date" class="form-control required col-md-6" id="perFinal" name="perFinal" placeholder="Periodo Final">
 
               <div style="margin-top: 10px ">
                 <button type="submit " class="btn btn-warning pull-right " style="margin-left: 6px ">Salvar</button>
@@ -39,12 +33,10 @@
           </form>
         </ba-card>
       </div>
-
-
       <div *ngIf="!insercao ">
         <button (click)="addNovo() " class="btn btn-success pull-right col-md-1 col-sm-1 " style="margin-left: 6px ">Novo</button>
         <div class="col-md-11 col-sm-11 ">
-          <ba-card cardTitle=" " baCardClass="with-scroll table-panel ">
+          <ba-card cardTitle=" Eventos Fixos" baCardClass="with-scroll table-panel ">
             <table class="table table-hover ">
               <thead>
                 <tr class="black-muted-bg ">
@@ -68,11 +60,6 @@
           </ba-card>
         </div>
       </div>
-
-
-
-
-
     </div>
   </div>
 </div>
