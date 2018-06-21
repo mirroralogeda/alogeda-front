@@ -7,10 +7,10 @@
           <form (ngSubmit)="submit()">
             <div class="form-group col-md-12">
               <label for="periodoInicial">Período Inicial</label>
-              <input type="date" class="form-control" [value]="tabSelecionada.perInicial" />
+              <input type="date" required name="perInicial" class="form-control" [(ngModel)]="tabSelecionada.perInicial">
 
               <label for="periodoFinal">Período Final</label>
-              <input type="date" class="form-control" [value]="tabSelecionada.perFinal" />
+              <input type="date" required name="perFinal" class="form-control" [(ngModel)]="tabSelecionada.perFinal">
 
               <div style="margin-top: 3px">
                 <table class="table table-hover">
@@ -43,8 +43,10 @@
                 </table>
               </div>
 
+
               <div style="margin-top: 10px">
-                <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                <button type="submit" [disabled]="!(tabSelecionada.perInicial && tabSelecionada.perFinal && tabSelecionada.faixas.length > 0)"
+                  class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                 <button type="button" (click)="cancela()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
               </div>
 
@@ -53,11 +55,17 @@
         </ba-card>
       </div>
 
+      <div *ngIf="!edicao && tabSelecionada">
+        <ul>
+          <li style="cursor: pointer" *ngFor="let tab of data; let i = index" (click)="selecionaTab(i)">{{parseDate(tab.perInicial)}} até {{parseDate(tab.perFinal)}}</li>
+        </ul>
+      </div>
+
       <div *ngIf="!edicao">
         <button *ngIf="tabSelecionada" (click)="editar()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Editar</button>
         <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
         <div *ngIf="tabSelecionada">
-          Tabela do período de {{tabSelecionada.perInicial}} até {{tabSelecionada.perFinal}}
+          Tabela do período de {{parseDate(tabSelecionada.perInicial)}} até {{parseDate(tabSelecionada.perFinal)}}
         </div>
         <table class="table table-hover">
           <thead>
