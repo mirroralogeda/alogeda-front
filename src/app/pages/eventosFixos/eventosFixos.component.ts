@@ -8,16 +8,17 @@ import {
 } from "@angular/forms";
 import { GrupoEventosService } from "../grupo-eventos/grupo-eventos.service";
 import { HostService } from "../../host.service";
+import { FuncionarioService } from "../funcionarios/funcionarios.service";
 
 @Component({
   selector: "data-tables",
   templateUrl: "./eventosFixos.html",
   styleUrls: ["./eventosFixos.scss"]
 })
-export class EventosFixosComponent implements OnInit {
+export class EventosFixosComponent {
   insercao: boolean = false;
   data = [];
-  funcionarios = [];
+  funcionariosLista = [];
   eventos = [];
 
   form = new FormBuilder().group({
@@ -28,38 +29,40 @@ export class EventosFixosComponent implements OnInit {
     perFinal: new FormControl()
   });
 
-  ngOnInit() {
-    this.buscarEventosFixos();
-  }
-
   buscarEventosFixos() {
-    this.hostService.defaultGet('eventosfixos/getall', {}, retorno => {
-      this.data = retorno;
-    })
+    this.hostService.defaultGet("eventosfixos/getall", {}, retorno => {
+      console.log("eventos fixos", retorno.data.result);
+      this.data = retorno.data.result;
+    });
   }
 
   buscarFuncionarios() {
-    this.hostService.defaultGet('funcionarios/getall', {}, retorno => {
-      this.funcionarios = retorno;
-    })
+    this.hostService.defaultGet("funcionarios/findAll", {}, retorno => {
+      this.funcionariosLista = retorno.data.result;
+    });
   }
 
   buscarEventos() {
-    this.hostService.defaultGet('eventos/getall', {}, retorno => {
-      this.eventos = retorno;
-    })
+    this.hostService.defaultGet("eventos/getall", {}, retorno => {
+      this.eventos = retorno.data.result;
+    });
   }
 
   constructor(
     private service: EventosFixosService,
     private hostService: HostService
-  ) { }
+  ) {
+    this.buscarEventosFixos();
+  }
 
   alterar(item) {
     this.buscarEventos();
     this.buscarFuncionarios();
-    item.perFinal = this.dataParaCliente(item.perFinal)
-    item.perInicial = this.dataParaCliente(item.perInicial)
+    item.perFinal = this.dataParaCliente(item.perFinal);
+    item.perInicial = this.dataParaCliente(item.perInicial);
+    item.funcionarios = item.funcionarios.id;
+    item.eventos = item.eventos.id;
+    console.log(item);
     this.form.setValue(item);
     this.insercao = !this.insercao;
   }
@@ -68,10 +71,14 @@ export class EventosFixosComponent implements OnInit {
     let data = this.form.value;
     data.perInicial = this.dataParaServidor(data.perInicial);
     data.perFinal = this.dataParaServidor(data.perFinal);
-    this.hostService.defaultPost("eventosFixos/save", this.form.value, ret => {
+    data.funcionarios = { id: data.funcionarios };
+    data.eventos = { id: data.eventos };
+    // console.log(data);
+    this.hostService.defaultPost("eventosfixos/save", data, ret => {
       if (ret.status === 200) {
         this.insercao = false;
         this.form.reset();
+        this.buscarEventosFixos();
       }
     });
   }
@@ -86,13 +93,16 @@ export class EventosFixosComponent implements OnInit {
   }
 
   protected delete() {
-    this.hostService.defaultPost("eventosfixos/delete", this.form.value, ret => {
-      console.log(ret);
-    });
+    this.hostService.defaultPost(
+      "eventosfixos/delete",
+      this.form.value,
+      ret => {
+        console.log(ret);
+      }
+    );
   }
-  public setNovo() { }
-  public onDelete(item) { }
-
+  public setNovo() {}
+  public onDelete(item) {}
 
   dataParaServidor(dataCliente) {
     if (!dataCliente) {

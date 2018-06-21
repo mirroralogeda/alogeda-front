@@ -6,13 +6,13 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
             <div class="form-group col-md-12">
               <label for="funcionario">Funcionario</label>
-              <select name="funcionario" formControlName="funcionario" class="form-control">
-                <option></option>
-                <option *ngFor="let item of funcionarios" [value]="item">{{ item.pessoas.nome }}</option>
+              <select name="funcionario" formControlName="funcionarios" class="form-control">
+                <!-- <option></option> -->
+                <option *ngFor="let item of funcionariosLista" [value]="item.id">{{ item.pessoas.nome }}</option>
               </select>
               <label for="evento">Evento</label>
-              <select name="evento" formControlName="evento" class="form-control">
-                <option *ngFor="let item of eventos" [value]="item">{{ item.descricao }}</option>
+              <select name="evento" formControlName="eventos" class="form-control">
+                <option *ngFor="let item of eventos" [value]="item.id">{{ item.descricao }}</option>
               </select>
               <label for="perInicial">Periodo Inicial</label>
               <input formControlName="perInicial" type="date" class="form-control required col-md-6" id="perInicial" name="perInicial"
@@ -31,7 +31,7 @@
       <div *ngIf="!insercao">
         <button (click)="addNovo()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Novo</button>
         <div class="col-md-11 col-sm-11">
-          <ba-card cardTitle="Eventos Fixos" baCardClass="with-scroll table-panel">
+          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
             <table class="table table-hover">
               <thead>
                 <tr class="black-muted-bg">
@@ -46,7 +46,7 @@
                 <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
                   <td>{{item.eventos.descricao}}</td>
                   <td>{{item.eventos.percentual}}%</td>
-                  <td>{{item.funcionario.nome}}</td>
+                  <td>{{item.funcionarios.pessoas.nome}}</td>
                   <td>{{item.perInicial}}</td>
                   <td>{{item.perFinal}}</td>
                 </tr>

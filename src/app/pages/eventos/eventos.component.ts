@@ -46,10 +46,17 @@ export class EventosComponent {
     fb: FormBuilder,
     private hostService: HostService
   ) {
+    this.buscarEventos();
+    this.buscarGruposEventos();
+  }
+
+  buscarEventos() {
     this.service.getData().then(data => {
       this.data = data;
     });
+  }
 
+  buscarGruposEventos() {
     this.gruposEventosService.getAllGrupoEventos(retorno => {
       this.veioGrupos = true;
       this.gruposEventos = retorno;
@@ -68,6 +75,7 @@ export class EventosComponent {
       if (ret.status === 200) {
         this.insercao = false;
         this.form.reset();
+        this.buscarEventos();
       }
     });
   }
