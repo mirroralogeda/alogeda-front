@@ -52,13 +52,13 @@ export class TabSalFamiliaComponent implements OnInit {
 
   cancela() {
     this.faixasRemover = [];
-    this.tabSelecionada = this.getVigente();
     this.edicao = false;
+    this.loadData();
   }
 
   parseDate(dateString: string): String {
     if (dateString)
-      return new Date(dateString).toLocaleDateString();
+      return dateString.replace(/(\d{4})\-(\d{2})\-(\d{2})/, "$3/$2/$1");
 
     return null;
   }

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
-import { TabSalFamiliaComponent } from './tab-sal-familia.component';
-import { TabSalFamiliaService } from './tab-sal-familia.service';
-import { routing } from './tab-sal-familia.routing';
+import { FolhaComponent } from './folha.component';
+import { FolhaService } from './folha.service';
+import { routing } from './folha.routing';
 import { HttpModule } from '@angular/http';
 import { NgaModule } from '../../theme/nga.module';
 import {LOCALE_ID} from '@angular/core';
@@ -16,13 +16,13 @@ import {LOCALE_ID} from '@angular/core';
         HttpModule,
         NgaModule
     ],
-    declarations: [ TabSalFamiliaComponent ],
+    declarations: [ FolhaComponent ],
 				providers: [
           {
             provide: LOCALE_ID,
             useValue: "pt-BR"
           },
-          TabSalFamiliaService
+          FolhaService
         ]
     })
-export class TabSalFamiliaModule { }
+export class FolhaModule { }
