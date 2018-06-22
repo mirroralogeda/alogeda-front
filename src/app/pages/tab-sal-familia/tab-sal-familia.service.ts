@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HostService } from "../../host.service";
 import { TabSalFamilia, Faixa } from "./tab-sal-familia.model";
-import { groupBy, orderBy } from 'lodash';
+import * as _ from 'lodash';
 import { promise } from "selenium-webdriver";
 
 @Injectable()
@@ -13,16 +13,16 @@ export class TabSalFamiliaService {
         let faixas: any[] = e.data.result;
 
         if (faixas.length > 0) {
-          let data = groupBy(faixas, f => f.perInicial);
+          let data = _.groupBy(faixas, f => f.perInicial);
           let tabs: TabSalFamilia[] = [];
 
           for (var k in data) {
             let t: any[] = data[k];
             let primF = t[0];
-            tabs.push(new TabSalFamilia(primF.perInicial, primF.perFinal, orderBy(t.map(f => f as Faixa), f => f.valInicial)));
+            tabs.push(new TabSalFamilia(primF.perInicial, primF.perFinal, _.orderBy(t.map(f => f as Faixa), f => f.valInicial)));
           }
 
-          resolve(orderBy(tabs, t => t.perInicial));
+          resolve(_.orderBy(tabs, t => t.perInicial));
         }
 
         resolve([]);

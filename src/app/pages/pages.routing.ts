@@ -92,6 +92,10 @@ export const routes: Routes = [
         loadChildren: "./eventosFixos/eventosFixos.module#EventosFixosModule"
       },
       {
+        path: "cadastros/folha",
+        loadChildren: "./folha/folha.module#FolhaModule"
+      },
+      {
         path: "cadastros/pessoas",
         loadChildren: "./pessoas/pessoas.module#PessoasModule"
       }

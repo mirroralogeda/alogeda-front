@@ -77,9 +77,9 @@
           </thead>
           <tbody *ngIf="tabSelecionada">
             <tr *ngFor="let faixa of tabSelecionada?.faixas" class="no-top-border">
-              <td>{{faixa.valInicial}}</td>
-              <td>{{faixa.valFinal}}</td>
-              <td>{{faixa.valor}}</td>
+              <td>{{faixa.valInicial | currency:'BRL':true:'1.2-2'}}</td>
+              <td>{{faixa.valFinal | currency:'BRL':true:'1.2-2'}}</td>
+              <td>{{faixa.valor | currency:'BRL':true:'1.2-2'}}</td>
             </tr>
           </tbody>
         </table>
