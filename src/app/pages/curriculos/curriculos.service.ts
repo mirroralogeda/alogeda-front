@@ -14,7 +14,6 @@ export class CurriculosService {
 
   constructor(private hostService: HostService) { }
 
-
   savePessoa(data, callback) {
     this.hostService.defaultPost("pessoas/save", data, res => {
       callback(res);
@@ -39,7 +38,26 @@ export class CurriculosService {
     });
   }
 
-  getEscolaridades(callback){
+  getCurriculo(data, callback) {
+    return this.hostService.defaultGet("curriculos/findcompleto", { id: data }, res => {
+      callback(res);
+    });
+  }
+
+  getFormacoes(data, callback) {
+    return this.hostService.defaultGet("formacoes/findbycurriculo", { id: data }, res => {
+      callback(res);
+    });
+  }
+
+  deleteFormacoes(data, callback) {
+    return this.hostService.defaultPost("formacoes/delete", data, res => {
+      callback(res);
+    });
+  }
+
+
+  getEscolaridades(callback) {
     return this.hostService.defaultGet("escolaridade/getall", null, res => {
       console.log(res);
       callback(res);

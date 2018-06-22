@@ -17,10 +17,10 @@ export const routes: Routes = [
     component: Pages,
     children: [
       { path: "", redirectTo: "curriculos", pathMatch: "full" },
-      // {
-      //   path: "dashboard",
-      //   loadChildren: "./dashboard/dashboard.module#DashboardModule"
-      // },
+      {
+        path: "dashboard",
+        loadChildren: "./dashboard/dashboard.module#DashboardModule"
+      },
       {
         path: "recrutamento/curriculos",
         loadChildren: "./curriculos/curriculos.module#CurriculosModule"
@@ -42,10 +42,10 @@ export const routes: Routes = [
         path: "cadastros/cidades",
         loadChildren: "./cidades/cidades.module#CidadesModule"
       },
-      {
-        path: "recrutamento/vagas",
-        loadChildren: "./vagas/vagas.module#VagasModule"
-      },
+      // {
+      //   path: "recrutamento/vagas",
+      //   loadChildren: "./vagas/vagas.module#VagasModule"
+      // },
       {
         path: "cargos/setores",
         loadChildren: "./setores/setores.module#SetoresModule"
