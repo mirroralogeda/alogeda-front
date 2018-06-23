@@ -37,21 +37,29 @@ export class FolhaComponent implements OnInit {
     return null;
   }
 
-parseVal(str: string): string {
-  return new CurrencyPipe("BRL").transform(str);
-}
+  number_format(val: string): string {
+    return val;
+  }
 
   async getFolhas(i) {
     this.folhas = await this.service.getFolhas(this.calculos[i].calculoId);
   }
 
   removeNeutros(itens) {
-    return itens.filter(x => x.tipo != "NEUTRO");
+    return itens.filter(x => x.tipo != "NEUTRO" && x.valor != "0");
+  }
+
+  getNeutos(itens) {
+    return itens.filter(x => x.tipo == "NEUTRO" && x.valor != "0");
   }
 
   async calcula() {
     await this.service.calcula();
     this.loadData();
+  }
+
+  voltar() {
+    this.folhas = null;
   }
 
 }
