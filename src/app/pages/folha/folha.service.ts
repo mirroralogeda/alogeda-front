@@ -27,5 +27,13 @@ export class FolhaService {
     });
   }
 
+  calcula(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.hostService.defaultPost("calculos/calcula", null, e => {
+        resolve();
+      });
+    });
+  }
+
 }
 
