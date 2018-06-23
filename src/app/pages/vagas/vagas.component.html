@@ -5,36 +5,38 @@
 
         <div class="col-md-12 col-sm-12" *ngIf="insert">
             <ba-card>
-              <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+              <form [formGroup]="form">
                 <div class="form-group col-md-12">
     
-                  <label for="data_inicio">Data Início</label>
-                  <input formControlName="data_inicio" type="text" class="form-control required" id="descricao" name="descricao" placeholder="Data Início">
-    
-                  <label for="data_fim">Data Fim</label>
-                  <select name="data_fim" formControlName="tipo" class="form-control">
-                    <option></option>
-                    <option *ngFor="let item of tipos" [value]="item">{{ item }}</option>
-                  </select>
+                  <label for="dataInicio">Data Inicial</label>
+                    <input formControlName="dataInicio" type="date" class="form-control required col-md-6" id="dataInicio" name="dataInicio"
+                    placeholder="Data Inicial">
+                    
+                  <label for="dataFim">Data Inicial</label>
+                    <input formControlName="dataFim" type="date" class="form-control required col-md-6" id="dataFim" name="dataFim"
+                    placeholder="Data Final">
     
                   <label for="quantidade">Quantidade</label>
-                  <input formControlName="quantidade" type="number" class="form-control required" id="automatico" name="automatico" placeholder="Automatico">
+                  <input formControlName="quantidade" type="number" class="form-control required" id="quantidade" name="quantidade" placeholder="Quantidade">
     
-                  <label for="desc_geral">Descrição Geral</label>
-                  <input formControlName="desc_geral" type="text" class="form-control required" id="formula" name="formula" placeholder="Formula">
-    
-                  <label for="cargos_id">Cargo Correspondente</label>
-                  <select name="cargos_id" formControlName="cargos_id" class="form-control">
-                    <option *ngFor="let item of cargos" [value]="item.id" (select)="addGrupoEvento(item)">{{ formatarGrupo(item) }}</option>
+                  <label for="descGeral">Descrição Geral</label>
+                  <textarea formControlName="descGeral" type="text" class="form-control required" id="descGeral" name="descGeral" placeholder="Descrição Geral"></textarea>
+
+                  <label for="cargos">Cargo Correspondente</label>
+                  <select name="cargos" formControlName="cargos" class="form-control">
+                    <option *ngFor="let item of cargos" [value]="item.id">{{item.nome}}</option>
                   </select>
-    
-                  <label for="tipo_liberacao">Tipo de Liberação</label>
-                  <input formControlName="tipo_liberacao" type="number" class="form-control required" id="percentual" name="percentual" placeholder="Percentual">
-    
+  
+                  <label for="tipoLiberacao">Tipo de Liberação</label>
+                  <select name="tipoLiberacao" formControlName="tipoLiberacao" class="form-control required">
+                    <option  [value]="1">Interna</option>
+                    <option  [value]="2">Externa</option>
+                    <option  [value]="3">Ambos</option>
+                  </select>
+
                   <div style="margin-top: 10px">
-                    <button type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                    <button (click)="onSubmit()" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                     <button (click)="limpaForm()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
-                    <button (click)="delete()" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
                   </div>
                 </div>
               </form>
@@ -57,11 +59,11 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
-                        <td style="text-align: left">{{item.data_inicio}}</td>
-                        <td style="text-align: left">{{item.data_fim}}</td>
+                        <td style="text-align: left">{{dataFormatada(item.dataInicio)}}</td>
+                        <td style="text-align: left">{{dataFormatada(item.dataFim)}}</td>
                         <td style="text-align: left">{{item.quantidade}}</td>
-                        <td style="text-align: left">{{item.cargos}}%</td>
-                        <td style="text-align: left">{{item.tipo_liberacao}}</td>
+                        <td style="text-align: left">{{item.cargos.nome}}</td>
+                        <td style="text-align: left">{{formatarTipoLiberacao(item.tipoLiberacao)}}</td>
                       </tr>
                     </tbody>
                   </table>

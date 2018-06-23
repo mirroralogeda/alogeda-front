@@ -44,6 +44,7 @@ export class CidadesComponent implements OnInit {
   setCidade(item) {
     this.form.controls["nome"].setValue(item.nome);
     this.form.controls["uf"].setValue(item.uf);
+    this.form.controls["id"].setValue(item.id);
     this.insert = false;
   }
 
@@ -102,19 +103,19 @@ export class CidadesComponent implements OnInit {
     { Estado: "Tocantins", Sigla: "TO" },
   ];
   
-  public onSubmit(event) {
+  public onSubmit() {
+    console.log(this.form.value);
     this.cidadesService.save(this.form.value, () => {
-      event.confirm.resolve(event.newData);
+      this.getAll();
+      this.setNovo();
+      this.insert = true;
     });
-    this.getAll();
-    this.setNovo();
-    this.insert = true;
   }
 
-  onDelete() {
+  Deletar() {
     this.cidadesService.delete(this.form.value, ret => {
-      console.log(ret);
       this.getAll();
+      this.setNovo();
     });
   }
 

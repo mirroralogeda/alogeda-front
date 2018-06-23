@@ -25,7 +25,7 @@
     
             <div class="col-md-6 col-sm-12">
               <ba-card cardTitle="" baCardClass="with-scroll">
-                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <form [formGroup]="form">
                   <div class="form-group col-md-12">
                     <label for="input01">Nome da Cidade</label>
     
@@ -38,10 +38,10 @@
                     </select>
 
                     <div style="margin-top: 10px">
-                      <button *ngIf="insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                      <button *ngIf="insert" (click)="onSubmit()" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                       <button *ngIf="!insert" (click)="setNovo()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar</button>
-                      <button *ngIf="!insert" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
-                      <button *ngIf="!insert" (click)="onDelete(form.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+                      <button *ngIf="!insert" (click)="onSubmit()" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
+                      <!-- <button *ngIf="!insert" (click)="Deletar()" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button> -->
                     </div>
                   </div>
                 </form>

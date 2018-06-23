@@ -20,7 +20,6 @@ export class CidadesService {
   }
 
   delete(cidades: any, callback: Function) {
-    console.log(cidades);
     this.hostService.defaultPost("cidades/delete", cidades, callback);
   }
 
