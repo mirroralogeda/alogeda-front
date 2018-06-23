@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { Tab_irrfComponent } from './tab-irrf.component';
+import { TabIrrfComponent } from './tab-irrf.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab_irrfComponent
+    component: TabIrrfComponent
   }
 ];
 

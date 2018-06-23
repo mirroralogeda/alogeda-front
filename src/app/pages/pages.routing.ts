@@ -80,7 +80,7 @@ export const routes: Routes = [
       },
       {
         path: "cadastros/tab-irrf",
-        loadChildren: "./tab-irrf/tab-irrf.module#Tab_irrfModule"
+        loadChildren: "./tab-irrf/tab-irrf.module#TabIrrfModule"
       },
       {
         path: "cadastros/tab-sal-familia",

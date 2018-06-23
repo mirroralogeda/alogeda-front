@@ -1,23 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Tab_irrfComponent } from './tab-irrf.component';
+import { FormsModule } from "@angular/forms";
+import { TabIrrfComponent } from './tab-irrf.component';
+import { TabIrrfService } from './tab-irrf.service';
 import { routing } from './tab-irrf.routing';
 import { HttpModule } from '@angular/http';
 import { NgaModule } from '../../theme/nga.module';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { LOCALE_ID } from '@angular/core';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        routing,
-        Ng2SmartTableModule,
-        HttpModule,
-        NgaModule
-    ],
-    declarations: [
-        Tab_irrfComponent
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    routing,
+    HttpModule,
+    NgaModule
+  ],
+  declarations: [TabIrrfComponent],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "pt-BR"
+    },
+    TabIrrfService
+  ]
 })
-export class Tab_irrfModule { }
+export class TabIrrfModule { }
