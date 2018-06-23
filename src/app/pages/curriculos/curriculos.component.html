@@ -1,4 +1,4 @@
-<div class="widgets">
+<div class="widgets" *ngIf="!concluido">
   <div class="row">
     <div class="col-md-12">
       <ba-card cardTitle="Dados pessoais" class="modal-buttons">
@@ -12,7 +12,7 @@
 </div>
 
 
-<div class="widgets">
+<div class="widgets" *ngIf="!concluido">
   <div class="row">
 
     <!-- Dados pessoais -->
@@ -160,7 +160,8 @@
                 <button *ngIf="insertExperiencia" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
                 <button *ngIf="!insertExperiencia" (click)="setNovoExperiencia()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar / Novo</button>
                 <button *ngIf="!insertExperiencia" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
-                <button *ngIf="!insertExperiencia" (click)="onDeleteExperiencia(formExperiencia.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+                <button *ngIf="!insertExperiencia" (click)="onDeleteExperiencia(formExperiencia.value)" class="btn btn-danger pull-right"
+                  style="margin-left: 6px">Deletar</button>
               </div>
             </div>
           </div>
@@ -193,18 +194,18 @@
     <div class="col-md-12" *ngIf="show4">
 
       <ba-card cardTitle="Conclusão" baCardClass="with-scroll">
-        <form>
+        <form [formGroup]="formConclusao" (ngSubmit)="concluirCurriculo()">
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
               <label for="input01">Informações adicionais (opcional)</label>
-              <textarea placeholder="Default Input" class="form-control" id="textarea01"></textarea>
+              <textarea formControlName="descricao" placeholder="" class="form-control" id="textarea01"></textarea>
             </div>
-            <div class="form-group col-md-6">
+            <!-- <div class="form-group col-md-6">
               <label for="input01">Anexar arquivo .pdf (opcional)</label>
               <ba-file-uploader [fileUploaderOptions]="fileUploaderOptions"></ba-file-uploader>
-            </div>
+            </div> -->
           </div>
-          <button class="{{ btnSelected }} pull-right" (click)="selectFase(5, true)">Guardar e prosseguir</button>
+          <button class="{{ btnSelected }} pull-right" type="submit">Concluir</button>
         </form>
       </ba-card>
 
@@ -213,3 +214,17 @@
 
   </div>
 </div>
+
+<div class="widgets" *ngIf="concluido">
+  <div class="row">
+    <div class="col-md-12">
+      <ba-card cardTitle="concluído" class="modal-buttons">
+        <div>
+          <h2>Seu currículo foi enviado com sucesso!</h2>
+          <h3>Para editar as informações clique aqui </h3><button (click)="updateNovamente()" class="btn btn-success">Voltar</button>
+        </div>
+      </ba-card>
+    </div>
+  </div>
+</div>
+

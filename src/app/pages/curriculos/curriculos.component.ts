@@ -40,6 +40,11 @@ export class CurriculosComponent implements OnInit {
   show3 = false;
   show4 = false;
   show5 = false;
+  concluido = false;
+
+  formConclusao = new FormBuilder().group({
+    descricao: new FormControl()
+  });
 
   formPessoa = new FormBuilder().group({
     id: new FormControl(0),
@@ -77,7 +82,8 @@ export class CurriculosComponent implements OnInit {
   }
   setForm(callback) {
     this.curriculosService.getPessoaCpf(this.formPessoa.value.cpf, res => {
-
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log(res.data);
       if (res.data.result) {
         this.data.pessoas.id = res.data.result.id;
         this.data.pessoas.cpf = res.data.result.cpf;
@@ -91,7 +97,13 @@ export class CurriculosComponent implements OnInit {
           this.data.id = res.data.result.curriculoses[0].id;
         else {
           this.curriculosService.getCurriculo(this.data.pessoas.id, res2 => {
+            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbb");
+            console.log(res2.data);
             this.data.id = res2.data.result[0].id;
+            if (res2.data.result[0].descricao)
+              this.formConclusao.setValue({ descricao: res2.data.result[0].descricao });
+            else
+              this.formConclusao.setValue({ descricao: "" });
           });
         }
 
@@ -101,6 +113,24 @@ export class CurriculosComponent implements OnInit {
       }
     });
     callback(false);
+
+  }
+  updateNovamente() {
+    this.concluido = false;
+  }
+
+  concluirCurriculo(content) {
+    let data = {
+      id: this.data.id,
+      pessoas: {
+        id: this.data.pessoas.id
+      },
+      descricao: this.formConclusao.value.descricao
+    }
+    this.curriculosService.saveCurriculo(data, res => {
+      console.log(res);
+      this.concluido = true;
+    });
 
   }
 
@@ -113,6 +143,8 @@ export class CurriculosComponent implements OnInit {
       }
       this.curriculosService.saveCurriculo(data, res => {
         console.log(res);
+        this.searchFormPessoa();
+
       });
     }
   }
@@ -200,7 +232,7 @@ export class CurriculosComponent implements OnInit {
   }
 
   protected onDeleteFomacao(data) {
-    let asd = { id: data.id}
+    let asd = { id: data.id }
     this.curriculosService.deleteFormacoes(asd, res => {
       console.log(res);
       this.getFormacoes();
@@ -235,9 +267,9 @@ export class CurriculosComponent implements OnInit {
 
   public setExperiencia(experiencia) {
     if (experiencia.dataInicio)
-    experiencia.dataInicio = this.dataParaCliente(experiencia.dataInicio);
+      experiencia.dataInicio = this.dataParaCliente(experiencia.dataInicio);
     if (experiencia.dataFim)
-    experiencia.dataFim = this.dataParaCliente(experiencia.dataFim);
+      experiencia.dataFim = this.dataParaCliente(experiencia.dataFim);
 
     experiencia.areasAtuacao = experiencia.areasAtuacao.id;
 
@@ -262,7 +294,7 @@ export class CurriculosComponent implements OnInit {
   }
 
   protected onDeleteExperiencia(data) {
-    let asd = { id: data.id}
+    let asd = { id: data.id }
     this.curriculosService.deleteExperiencia(asd, res => {
       console.log(res);
       this.getExperiencia();
