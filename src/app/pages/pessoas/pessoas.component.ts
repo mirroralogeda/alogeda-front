@@ -71,6 +71,11 @@ export class PessoasComponent {
     this.form.setValue(item);
     this.insercao = !this.insercao;
   }
+  protected formatarGenero(genero){
+    if(genero === 1) return "Masculino"
+    else if (genero === 2) return "Feminino"
+    else return "Indefinido"
+  }
 
   public onSubmit(item) {
     let data = this.form.value;

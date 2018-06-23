@@ -57,8 +57,9 @@
               <tbody>
                 <tr *ngFor="let item of data" class="no-top-border" (click)="alterar(item)">
                   <td style="text-align: left">{{item.nome}}</td>
-                  <td style="text-align: left">{{item.genero}}</td>
+                  <td style="text-align: left">{{ formatarGenero(item.genero) }}</td>
                   <td style="text-align: left">{{item.cpf}}</td>
+                  <td style="text-align: left">{{item.email}}</td>
                   <td style="text-align: left">{{item.telefone}}</td>
                 </tr>
               </tbody>

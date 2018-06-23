@@ -1,0 +1,74 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div *ngIf="calculos && !folhas">
+        <div class="col-md-11 col-sm-11">
+          <button (click)="calcula()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Calcular folha para o período vigente</button>
+          <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+            <table class="table table-hover">
+              <thead>
+                <tr class="black-muted-bg">
+                  <th style="text-align: left">Período Inicial</th>
+                  <th style="text-align: left">Período Final</th>
+                  <th style="text-align: left">Data Cálculo</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="calculos">
+                <tr *ngFor="let c of calculos; let i = index" (click)="getFolhas(i)" class="no-top-border">
+                  <td>{{parseDate(c.perInicial)}}</td>
+                  <td>{{parseDate(c.perFinal)}}</td>
+                  <td>{{parseDate(c.dataCalculo)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ba-card>
+        </div>
+      </div>
+
+      <div *ngIf="folhas">
+        <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+          <div *ngFor="let f of folhas">
+            <h2>{{f.nome}}</h2>
+            <table class="table table-hover">
+              <thead>
+                <tr class="black-muted-bg">
+                  <th style="text-align: left">Nome</th>
+                  <th style="text-align: left">Referência</th>
+                  <th style="text-align: left">Provento</th>
+                  <th style="text-align: left">Desconto</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="folhas">]
+                <tr class="no-top-border">
+                  <td>Salário Bruto</td>
+                  <td></td>
+                  <td>{{f.salarioBruto}}</td>
+                  <td></td>
+                </tr>
+                <tr *ngFor="let item of removeNeutros(f.itens)" class="no-top-border">
+                  <td>{{item.nome}}</td>
+                  <td>{{item.Referencia}}</td>
+                  <td>{{item.tipo == "PROVENTO" ? item.valor : ''}}</td>
+                  <td>{{item.tipo == "DESCONTO" ? item.valor : ''}}</td>
+                </tr>
+                <tr class="no-top-border">
+                  <td>Total</td>
+                  <td></td>
+                  <td>{{f.totalProventos}}</td>
+                  <td>{{f.totalDescontos}}</td>
+                </tr>
+                <tr class="no-top-border">
+                  <td>Salário Líquido</td>
+                  <td></td>
+                  <td>{{f.salarioLiquido}}</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ba-card>
+      </div>
+    </div>
+  </div>
+</div>

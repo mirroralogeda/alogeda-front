@@ -41,7 +41,6 @@ export class CurriculosComponent implements OnInit {
   show4 = false;
   show5 = false;
 
-  // PESSOAS ----------
   formPessoa = new FormBuilder().group({
     id: new FormControl(0),
     cpf: new FormControl(),
@@ -52,13 +51,33 @@ export class CurriculosComponent implements OnInit {
     genero: new FormControl()
   });
 
+  formFormacao = new FormBuilder().group({
+    id: new FormControl(0),
+    instituicaoEnsino: new FormControl(),
+    escolaridade: new FormControl(),
+    dataInicio: new FormControl(),
+    dataFim: new FormControl(),
+    nome: new FormControl(),
+    curriculos: new FormControl()
+  });
+
+
+  formExperiencia = new FormBuilder().group({
+    id: new FormControl(0),
+    areasAtuacao: new FormControl(),
+    curriculos: new FormControl(),
+    dataInicio: new FormControl(),
+    dataFim: new FormControl(),
+    cargoOcupado: new FormControl(),
+    observacoes: new FormControl()
+  });
+
   searchFormPessoa() {
     this.setForm(res => { });
   }
   setForm(callback) {
     this.curriculosService.getPessoaCpf(this.formPessoa.value.cpf, res => {
-      console.log("res.data.result");
-      console.log(res.data.result);
+
       if (res.data.result) {
         this.data.pessoas.id = res.data.result.id;
         this.data.pessoas.cpf = res.data.result.cpf;
@@ -68,8 +87,13 @@ export class CurriculosComponent implements OnInit {
         this.data.pessoas.telefone = res.data.result.telefone;
         this.data.pessoas.genero = res.data.result.genero;
 
-        if (res.data.result.curriculoses[0].id)
+        if (res.data.result.curriculoses)
           this.data.id = res.data.result.curriculoses[0].id;
+        else {
+          this.curriculosService.getCurriculo(this.data.pessoas.id, res2 => {
+            this.data.id = res2.data.result[0].id;
+          });
+        }
 
         this.formPessoa.reset();
         this.formPessoa.setValue(this.data.pessoas);
@@ -93,15 +117,35 @@ export class CurriculosComponent implements OnInit {
     }
   }
 
-  public generos = [
-    {
-      nome: "Masculino",
-      id: 1
-    }, {
-      nome: "Feminino",
-      id: 2
+  public onSubmitPessoa(): void {
+    console.log(this.data.pessoas.id);
+    if (this.data.pessoas.id == null) {
+      this.curriculosService.savePessoa(this.formPessoa.value, res => {
+        if (res) {
+          this.selectFase(2);
+          this.setForm(res => {
+            if (res && this.data.id == null) {
+              this.onSubmitCurriculo();
+            }
+          })
+        }
+      });
+    } else {
+      if (this.data.id == null) {
+        this.onSubmitCurriculo();
+      }
+      this.selectFase(2);
     }
-  ]
+  }
+
+  onDeleteConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
 
   // FORMACAO ----------
   public escolaridades = [];
@@ -109,144 +153,122 @@ export class CurriculosComponent implements OnInit {
 
   public insertFormacao = true;
 
-  formFormacao = new FormBuilder().group({
-    id: new FormControl(0),
-    instituicaoEnsino: new FormControl(),
-    escolaridade: new FormControl(),
-    // dataInicio: new FormControl(),
-    // dataFim: new FormControl(),
-    nome: new FormControl(),
-    curriculos: new FormControl()
-  });
 
-
-
-
-  protected setFormacao(formacao) {
-    console.log(formacao);
-
-    this.insertFormacao = false;
-  }
-
-  protected setNovoFormacao() {
-    this.insertFormacao = true;
-  }
   protected onSubmitFormacao() {
+    console.log(this.formFormacao.value);
+
     this.formFormacao.value.curriculos = { id: this.data.id };
     this.formFormacao.value.escolaridade = +this.formFormacao.value.escolaridade;
-    //remover - falar com o professor
-    console.log(this.formFormacao.value);
+    this.formFormacao.value.dataInicio = this.dataParaServidor(this.formFormacao.value.dataInicio);
+    this.formFormacao.value.dataFim = this.dataParaServidor(this.formFormacao.value.dataFim);
 
     this.curriculosService.saveFormacao(this.formFormacao.value, res => {
       console.log(res);
+      this.formFormacao.reset();
+      this.getFormacoes();
     })
   }
-  protected onDeleteFomacao() {
+
+
+  public setFormacao(formacao) {
+    let data = formacao;
+    if (formacao.dataInicio)
+      data.dataInicio = this.dataParaCliente(formacao.dataInicio);
+    if (formacao.dataFim)
+      data.dataFim = this.dataParaCliente(formacao.dataFim);
+
+    data.escolaridade = formacao.escolaridade.id;
+
+    this.formFormacao.reset();
+    this.formFormacao.setValue(data);
+    this.insertFormacao = false;
+    this.getFormacoes();
+  }
+
+  public getFormacoes() {
+    this.curriculosService.getFormacoes(this.data.id, res => {
+      console.log(res.data.result);
+      if (res.data.result) {
+        this.formacoes = res.data.result
+      }
+    });
+  }
+
+  protected setNovoFormacao() {
+    this.formFormacao.reset();
+    this.insertFormacao = true;
+  }
+
+  protected onDeleteFomacao(data) {
+    let asd = { id: data.id}
+    this.curriculosService.deleteFormacoes(asd, res => {
+      console.log(res);
+      this.getFormacoes();
+    });
 
   }
-  settings2 = {
-    add: {
-      addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-      createButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
-      saveButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    columns: {
-      curso: {
-        title: 'Curso',
-        type: 'string'
-      },
-      nivel: {
-        title: 'Nível de ensino',
-        type: 'string'
-      },
-      instituicao: {
-        title: 'Instituição',
-        type: 'string'
-      },
-      inicio: {
-        title: 'Ano de início',
-        type: 'int'
-      },
-      fim: {
-        title: 'Ano de término',
-        type: 'int'
+
+
+
+  // EXPERIENCIAS ----------
+  public atuacoes = [];
+  public experiencias = [];
+
+  public insertExperiencia = true;
+
+
+  protected onSubmitExperiencia() {
+    console.log(this.formExperiencia.value);
+
+    this.formExperiencia.value.curriculos = { id: this.data.id };
+    this.formExperiencia.value.areasAtuacao = +this.formExperiencia.value.areasAtuacao;
+    this.formExperiencia.value.dataInicio = this.dataParaServidor(this.formExperiencia.value.dataInicio);
+    this.formExperiencia.value.dataFim = this.dataParaServidor(this.formExperiencia.value.dataFim);
+
+    this.curriculosService.saveExperiencia(this.formExperiencia.value, res => {
+      console.log(res);
+      this.formExperiencia.reset();
+      this.getExperiencia();
+    })
+  }
+
+
+  public setExperiencia(experiencia) {
+    if (experiencia.dataInicio)
+    experiencia.dataInicio = this.dataParaCliente(experiencia.dataInicio);
+    if (experiencia.dataFim)
+    experiencia.dataFim = this.dataParaCliente(experiencia.dataFim);
+
+    experiencia.areasAtuacao = experiencia.areasAtuacao.id;
+
+    this.formExperiencia.reset();
+    this.formExperiencia.setValue(experiencia);
+    this.insertExperiencia = false;
+    this.getExperiencia();
+  }
+
+  public getExperiencia() {
+    this.curriculosService.getExperiencia(this.data.id, res => {
+      console.log(res.data.result);
+      if (res.data.result) {
+        this.experiencias = res.data.result
       }
-    }
-  };
-  source2: LocalDataSource = new LocalDataSource();
+    });
+  }
 
+  protected setNovoExperiencia() {
+    this.formExperiencia.reset();
+    this.insertExperiencia = true;
+  }
 
+  protected onDeleteExperiencia(data) {
+    let asd = { id: data.id}
+    this.curriculosService.deleteExperiencia(asd, res => {
+      console.log(res);
+      this.getExperiencia();
+    });
 
-  settings3 = {
-    add: {
-      addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-      createButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
-      saveButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    columns: {
-      habilidades: {
-        title: 'habilidades e qualificações relacionadas ao cargo pretendido',
-        type: 'string'
-      }
-    }
-  };
-  source3: LocalDataSource = new LocalDataSource();
-
-
-  settings4 = {
-    add: {
-      addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-      createButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
-      saveButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    columns: {
-      experiencia: {
-        title: 'Experiência profissional',
-        type: 'string'
-      },
-      area: {
-        title: 'Área de atuação',
-        type: 'string'
-      },
-      inicio: {
-        title: 'Ano de início',
-        type: 'int'
-      },
-      fim: {
-        title: 'Ano de término',
-        type: 'int'
-      }
-    }
-  };
-  source4: LocalDataSource = new LocalDataSource();
-
+  }
 
 
 
@@ -258,10 +280,12 @@ export class CurriculosComponent implements OnInit {
     }
     if (f == 2) {
       this.cb2 = this.btnSelected;
+      this.getFormacoes();
       this.show2 = true;
     }
     if (f == 3) {
       this.cb3 = this.btnSelected;
+      this.getExperiencia();
       this.show3 = true;
 
     }
@@ -288,34 +312,44 @@ export class CurriculosComponent implements OnInit {
     this.show5 = false;
   }
 
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
+  public generos = [
+    {
+      nome: "Masculino",
+      id: 1
+    }, {
+      nome: "Feminino",
+      id: 2
     }
+  ]
+
+
+  dataParaServidor(dataCliente) {
+    if (!dataCliente) {
+      return null;
+    }
+    return (
+      dataCliente.substr(8, 2) +
+      "/" +
+      dataCliente.substr(5, 2) +
+      "/" +
+      dataCliente.substr(0, 4) +
+      " 00:00:00"
+    );
   }
 
-  public onSubmitPessoa(): void {
-    console.log(this.data.pessoas.id);
-    if (this.data.pessoas.id == null) {
-      this.curriculosService.savePessoa(this.formPessoa.value, res => {
-        if (res) {
-          this.selectFase(2);
-          this.setForm(res => {
-            if (res && this.data.id == null) {
-              this.onSubmitCurriculo();
-            }
-          })
-        }
-      });
-    } else {
-      if (this.data.id == null) {
-        this.onSubmitCurriculo();
-      }
-      this.selectFase(2);
+  dataParaCliente(dataServidor) {
+    if (!dataServidor) {
+      return "";
     }
+    return (
+      dataServidor.substr(6, 4) +
+      "-" +
+      dataServidor.substr(3, 2) +
+      "-" +
+      dataServidor.substr(0, 2)
+    );
   }
+
 
   constructor(fb: FormBuilder, private activeModal: NgbModal, private curriculosService: CurriculosService, public hostService: HostService) {
   }
@@ -325,7 +359,10 @@ export class CurriculosComponent implements OnInit {
     this.selectFase(1);
     this.curriculosService.getEscolaridades(res => {
       this.escolaridades = res.data.result;
-    })
+    });
+    this.curriculosService.getArea(res => {
+      this.atuacoes = res.data.result;
+    });
   }
 
 

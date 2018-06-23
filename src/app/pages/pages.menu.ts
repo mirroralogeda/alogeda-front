@@ -46,8 +46,7 @@ export const PAGES_MENU = [
               }
             }
           },
-      
-          {
+                {
             path: "tab-irrf",
             data: {
               menu: {
@@ -100,6 +99,14 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: "Eventos Fixos"
+              }
+            }
+          },
+          {
+            path: "folha",
+            data: {
+              menu: {
+                title: "Folha de Pagamento"
               }
             }
           },
