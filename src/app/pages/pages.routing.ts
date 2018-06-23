@@ -39,7 +39,7 @@ export const routes: Routes = [
       { path: "tables", loadChildren: "./tables/tables.module#TablesModule" },
 
       {
-        path: "cadastros/cidades",
+        path: "recrutamento/cidades",
         loadChildren: "./cidades/cidades.module#CidadesModule"
       },
       {
@@ -65,6 +65,10 @@ export const routes: Routes = [
       {
         path: "cadastros/dependentes",
         loadChildren: "./dependentes/dependentes.module#DependentesModule"
+      },
+      {
+        path: "cadastros/salarios",
+        loadChildren: "./salarios/salarios.module#SalariosModule"
       },
       {
         path: "cadastros/atestados",
@@ -96,7 +100,7 @@ export const routes: Routes = [
         loadChildren: "./folha/folha.module#FolhaModule"
       },
       {
-        path: "cadastros/pessoas",
+        path: "recrutamento/pessoas",
         loadChildren: "./pessoas/pessoas.module#PessoasModule"
       }
     ]

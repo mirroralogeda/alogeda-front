@@ -35,5 +35,8 @@ export class FuncionariosComponent implements OnInit {
   alterarAtestados(item){
     this.router.navigate(["pages/cadastros/atestados/"+item.id])
   }
+  alterarSalarios(item){
+    this.router.navigate(["pages/cadastros/salarios/"+item.id])
+  }
   constructor(private FuncionarioService: FuncionarioService,private router:Router) { }
 }

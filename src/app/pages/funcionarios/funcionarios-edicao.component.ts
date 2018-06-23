@@ -28,7 +28,7 @@ export class FuncionariosEdicaoComponent implements OnInit {
     nacionalidade: ['', Validators.required],
     naturalidade: ['', Validators.required],
     seguroDesemprego: ['', Validators.required],
-    dataDemissao: ['', Validators.required],
+    dataDemissao: [''],
     numeroCarteiraTrabalho: ['', Validators.required],
     serieCarteiraTrabalho: ['', Validators.required],
     estadoCarteiraTrabalho: ['', Validators.required],

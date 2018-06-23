@@ -15,22 +15,10 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: "curriculos",
+        path: "recrutamento",
         data: {
           menu: {
-            title: "general.menu.curriculos",
-            icon: "ion-document",
-            selected: false,
-            expanded: false,
-            order: 0
-          }
-        }
-      },
-      {
-        path: "cadastros",
-        data: {
-          menu: {
-            title: "general.menu.cadastros",
+            title: "general.menu.rc",
             icon: "ion-edit",
             selected: false,
             expanded: false,
@@ -46,7 +34,84 @@ export const PAGES_MENU = [
               }
             }
           },
-                {
+          {
+            path: "pessoas",
+            data: {
+              menu: {
+                title: "Pessoas"
+              }
+            }
+          },
+          {
+            path: "vagas",
+            data: {
+              menu: {
+                title: "general.menu.vagas"
+              }
+            }
+          },
+          {
+            path: "curriculos",
+            data: {
+              menu: {
+                title: "general.menu.curriculos"
+              }
+            }
+          },
+        ]
+      },
+
+      {
+        path: "cargos",
+        data: {
+          menu: {
+            title: "general.menu.csbf",
+            icon: "ion-edit",
+            selected: false,
+            expanded: false,
+            order: 100
+          }
+        },
+        children: [
+          {
+            path: "cargos",
+            data: {
+              menu: {
+                title: "general.menu.cargos"
+              }
+            }
+          },
+          {
+            path: "setores",
+            data: {
+              menu: {
+                title: "general.menu.setores"
+              }
+            }
+          },
+          {
+            path: "funcionarios",
+            data: {
+              menu: {
+                title: "general.menu.funcionarios"
+              }
+            }
+          },
+        ]
+      },
+      {
+        path: "cadastros",
+        data: {
+          menu: {
+            title: "Folha",
+            icon: "ion-edit",
+            selected: false,
+            expanded: false,
+            order: 100
+          }
+        },
+        children: [
+          {
             path: "tab-irrf",
             data: {
               menu: {
@@ -59,22 +124,6 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: "general.menu.tab_salario_familia"
-              }
-            }
-          },
-          {
-            path: "dependentes",
-            data: {
-              menu: {
-                title: "general.menu.dependentes"
-              }
-            }
-          },
-          {
-            path: "atestados",
-            data: {
-              menu: {
-                title: "general.menu.atestados"
               }
             }
           },
@@ -110,84 +159,9 @@ export const PAGES_MENU = [
               }
             }
           },
-          {
-            path: "pessoas",
-            data: {
-              menu: {
-                title: "Pessoas"
-              }
-            }
-          }
         ]
       },
-      {
-        path: "recrutamento",
-        data: {
-          menu: {
-            title: "general.menu.rc",
-            icon: "ion-edit",
-            selected: false,
-            expanded: false,
-            order: 100
-          }
-        },
-        children: [
-          {
-            path: "curriculos",
-            data: {
-              menu: {
-                title: "general.menu.curriculos"
-              }
-            }
-          },
-          {
-            path: "vagas",
-            data: {
-              menu: {
-                title: "general.menu.vagas"
-              }
-            }
-          },
-        ]
-      },
-      {
-        path: "cargos",
-        data: {
-          menu: {
-            title: "general.menu.csbf",
-            icon: "ion-edit",
-            selected: false,
-            expanded: false,
-            order: 100
-          }
-        },
-        children: [
-          {
-            path: "setores",
-            data: {
-              menu: {
-                title: "general.menu.setores"
-              }
-            }
-          },
-          {
-            path: "funcionarios",
-            data: {
-              menu: {
-                title: "general.menu.funcionarios"
-              }
-            }
-          },
-          {
-            path: "cargos",
-            data: {
-              menu: {
-                title: "general.menu.cargos"
-              }
-            }
-          }
-        ]
-      },
+
       // {
       //   path: "components",
       //   data: {
@@ -489,18 +463,7 @@ export const PAGES_MENU = [
       //     }
       //   ]
       // },
-      {
-        path: "",
-        data: {
-          menu: {
-            title: "general.menu.external_link",
-            url: "http://akveo.com",
-            icon: "ion-android-exit",
-            order: 800,
-            target: "_blank"
-          }
-        }
-      }
+
     ]
   }
 ];
