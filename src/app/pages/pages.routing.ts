@@ -42,10 +42,10 @@ export const routes: Routes = [
         path: "cadastros/cidades",
         loadChildren: "./cidades/cidades.module#CidadesModule"
       },
-      // {
-      //   path: "recrutamento/vagas",
-      //   loadChildren: "./vagas/vagas.module#VagasModule"
-      // },
+      {
+        path: "recrutamento/vagas",
+        loadChildren: "./vagas/vagas.module#VagasModule"
+      },
       {
         path: "cargos/setores",
         loadChildren: "./setores/setores.module#SetoresModule"
