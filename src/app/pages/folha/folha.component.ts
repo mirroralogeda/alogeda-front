@@ -5,6 +5,7 @@ import { FolhaService } from "./folha.service";
 import { HostService } from "../../host.service";
 import { FormsModule } from '@angular/forms';
 import { Jsonp } from '@angular/http';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'folha',
@@ -36,10 +37,13 @@ export class FolhaComponent implements OnInit {
     return null;
   }
 
+parseVal(str: string): string {
+  return new CurrencyPipe("BRL").transform(str);
+}
+
   async getFolhas(i) {
     this.folhas = await this.service.getFolhas(this.calculos[i].calculoId);
   }
-
 
   removeNeutros(itens) {
     return itens.filter(x => x.tipo != "NEUTRO");

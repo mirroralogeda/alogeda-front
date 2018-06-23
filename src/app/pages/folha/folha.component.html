@@ -39,12 +39,30 @@
                   <th style="text-align: left">Desconto</th>
                 </tr>
               </thead>
-              <tbody *ngIf="folhas">
+              <tbody *ngIf="folhas">]
+                <tr class="no-top-border">
+                  <td>Salário Bruto</td>
+                  <td></td>
+                  <td>{{f.salarioBruto}}</td>
+                  <td></td>
+                </tr>
                 <tr *ngFor="let item of removeNeutros(f.itens)" class="no-top-border">
                   <td>{{item.nome}}</td>
                   <td>{{item.Referencia}}</td>
                   <td>{{item.tipo == "PROVENTO" ? item.valor : ''}}</td>
                   <td>{{item.tipo == "DESCONTO" ? item.valor : ''}}</td>
+                </tr>
+                <tr class="no-top-border">
+                  <td>Total</td>
+                  <td></td>
+                  <td>{{f.totalProventos}}</td>
+                  <td>{{f.totalDescontos}}</td>
+                </tr>
+                <tr class="no-top-border">
+                  <td>Salário Líquido</td>
+                  <td></td>
+                  <td>{{f.salarioLiquido}}</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
