@@ -40,9 +40,14 @@ export class FolhaComponent implements OnInit {
     this.folhas = await this.service.getFolhas(this.calculos[i].calculoId);
   }
 
-  
+
   removeNeutros(itens) {
     return itens.filter(x => x.tipo != "NEUTRO");
+  }
+
+  async calcula() {
+    await this.service.calcula();
+    this.loadData();
   }
 
 }
