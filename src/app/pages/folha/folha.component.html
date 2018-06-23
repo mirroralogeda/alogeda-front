@@ -1,10 +1,13 @@
 <div class="widgets">
   <div class="row">
     <div class="col-md-12">
+      <button (click)="calcula()" class="btn btn-success pull-right " style="margin-left: 6px;margin-right: 15px;margin-bottom: 5px">Calcular folha para o período vigente</button>
+
+    </div>
+    <div class="col-md-12">
 
       <div *ngIf="calculos && !folhas">
-        <div class="col-md-11 col-sm-11">
-          <button (click)="calcula()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Calcular folha para o período vigente</button>
+        <div class="col-md-12 col-sm-12">
           <ba-card cardTitle="" baCardClass="with-scroll table-panel">
             <table class="table table-hover">
               <thead>
@@ -27,6 +30,7 @@
       </div>
 
       <div *ngIf="folhas">
+        <button (click)="voltar()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Voltar</button>
         <ba-card cardTitle="" baCardClass="with-scroll table-panel">
           <div *ngFor="let f of folhas">
             <h2>{{f.nome}}</h2>
@@ -43,29 +47,33 @@
                 <tr class="no-top-border">
                   <td>Salário Bruto</td>
                   <td></td>
-                  <td>{{f.salarioBruto}}</td>
+                  <td>{{number_format(f.salarioBruto)}}</td>
                   <td></td>
                 </tr>
                 <tr *ngFor="let item of removeNeutros(f.itens)" class="no-top-border">
                   <td>{{item.nome}}</td>
                   <td>{{item.Referencia}}</td>
-                  <td>{{item.tipo == "PROVENTO" ? item.valor : ''}}</td>
-                  <td>{{item.tipo == "DESCONTO" ? item.valor : ''}}</td>
+                  <td>{{item.tipo == "PROVENTO" ? number_format(item.valor) : ''}}</td>
+                  <td>{{item.tipo == "DESCONTO" ? number_format(item.valor) : ''}}</td>
                 </tr>
                 <tr class="no-top-border">
                   <td>Total</td>
                   <td></td>
-                  <td>{{f.totalProventos}}</td>
-                  <td>{{f.totalDescontos}}</td>
+                  <td>{{number_format(f.totalProventos)}}</td>
+                  <td>{{number_format(f.totalDescontos)}}</td>
                 </tr>
                 <tr class="no-top-border">
                   <td>Salário Líquido</td>
                   <td></td>
-                  <td>{{f.salarioLiquido}}</td>
+                  <td>{{number_format(f.salarioLiquido)}}</td>
                   <td></td>
                 </tr>
               </tbody>
             </table>
+            <h3>Eventos Neutros</h3>
+            <ul>
+              <li *ngFor="let n of getNeutos(f.itens)">{{n.nome}}: {{n.valor}}</li>
+            </ul>>
           </div>
         </ba-card>
       </div>

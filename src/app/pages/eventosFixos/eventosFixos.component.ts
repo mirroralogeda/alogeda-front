@@ -37,7 +37,7 @@ export class EventosFixosComponent {
   }
 
   buscarFuncionarios() {
-    this.hostService.defaultGet("funcionarios/findAll", {}, retorno => {
+    this.hostService.defaultGet("funcionarios/getall", {nome:''}, retorno => {
       this.funcionariosLista = retorno.data.result;
     });
   }
@@ -56,6 +56,7 @@ export class EventosFixosComponent {
   }
 
   alterar(item) {
+    item = {...item}
     this.buscarEventos();
     this.buscarFuncionarios();
     item.perFinal = this.dataParaCliente(item.perFinal);
@@ -68,7 +69,7 @@ export class EventosFixosComponent {
   }
 
   public onSubmit(item) {
-    let data = this.form.value;
+    let data = {...this.form.value};
     data.perInicial = this.dataParaServidor(data.perInicial);
     data.perFinal = this.dataParaServidor(data.perFinal);
     data.funcionarios = { id: data.funcionarios };
@@ -85,6 +86,9 @@ export class EventosFixosComponent {
 
   protected addNovo() {
     this.insercao = true;
+    
+    this.buscarEventos();
+    this.buscarFuncionarios();
   }
 
   protected limpaForm() {
