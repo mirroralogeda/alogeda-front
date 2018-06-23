@@ -32,6 +32,12 @@ export class CurriculosService {
     });
   }
 
+  saveExperiencia(data, callback) {
+    this.hostService.defaultPost("experiencias/save", data, res => {
+      callback(res);
+    });
+  }
+
   getPessoaCpf(data, callback) {
     return this.hostService.defaultGet("pessoas/getbycpf", { cpf: data }, res => {
       callback(res);
@@ -50,8 +56,21 @@ export class CurriculosService {
     });
   }
 
+
+  getExperiencia(data, callback) {
+    return this.hostService.defaultGet("experiencias/findbycurriculo", { id: data }, res => {
+      callback(res);
+    });
+  }
+
   deleteFormacoes(data, callback) {
     return this.hostService.defaultPost("formacoes/delete", data, res => {
+      callback(res);
+    });
+  }
+
+  deleteExperiencia(data, callback) {
+    return this.hostService.defaultPost("experiencias/delete", data, res => {
       callback(res);
     });
   }
@@ -59,9 +78,14 @@ export class CurriculosService {
 
   getEscolaridades(callback) {
     return this.hostService.defaultGet("escolaridade/getall", null, res => {
-      console.log(res);
       callback(res);
     });
   }
 
+  getArea(callback) {
+    return this.hostService.defaultGet("areas_atuacao/getall", null, res => {
+      console.log(res);
+      callback(res);
+    });
+  }
 }

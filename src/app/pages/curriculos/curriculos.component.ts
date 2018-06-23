@@ -61,6 +61,17 @@ export class CurriculosComponent implements OnInit {
     curriculos: new FormControl()
   });
 
+
+  formExperiencia = new FormBuilder().group({
+    id: new FormControl(0),
+    areasAtuacao: new FormControl(),
+    curriculos: new FormControl(),
+    dataInicio: new FormControl(),
+    dataFim: new FormControl(),
+    cargoOcupado: new FormControl(),
+    observacoes: new FormControl()
+  });
+
   searchFormPessoa() {
     this.setForm(res => { });
   }
@@ -197,6 +208,70 @@ export class CurriculosComponent implements OnInit {
 
   }
 
+
+
+  // EXPERIENCIAS ----------
+  public atuacoes = [];
+  public experiencias = [];
+
+  public insertExperiencia = true;
+
+
+  protected onSubmitExperiencia() {
+    console.log(this.formExperiencia.value);
+
+    this.formExperiencia.value.curriculos = { id: this.data.id };
+    this.formExperiencia.value.areasAtuacao = +this.formExperiencia.value.areasAtuacao;
+    this.formExperiencia.value.dataInicio = this.dataParaServidor(this.formExperiencia.value.dataInicio);
+    this.formExperiencia.value.dataFim = this.dataParaServidor(this.formExperiencia.value.dataFim);
+
+    this.curriculosService.saveExperiencia(this.formExperiencia.value, res => {
+      console.log(res);
+      this.formExperiencia.reset();
+      this.getExperiencia();
+    })
+  }
+
+
+  public setExperiencia(experiencia) {
+    if (experiencia.dataInicio)
+    experiencia.dataInicio = this.dataParaCliente(experiencia.dataInicio);
+    if (experiencia.dataFim)
+    experiencia.dataFim = this.dataParaCliente(experiencia.dataFim);
+
+    experiencia.areasAtuacao = experiencia.areasAtuacao.id;
+
+    this.formExperiencia.reset();
+    this.formExperiencia.setValue(experiencia);
+    this.insertExperiencia = false;
+    this.getExperiencia();
+  }
+
+  public getExperiencia() {
+    this.curriculosService.getExperiencia(this.data.id, res => {
+      console.log(res.data.result);
+      if (res.data.result) {
+        this.experiencias = res.data.result
+      }
+    });
+  }
+
+  protected setNovoExperiencia() {
+    this.formExperiencia.reset();
+    this.insertExperiencia = true;
+  }
+
+  protected onDeleteExperiencia(data) {
+    let asd = { id: data.id}
+    this.curriculosService.deleteExperiencia(asd, res => {
+      console.log(res);
+      this.getExperiencia();
+    });
+
+  }
+
+
+
   selectFase(f) {
     this.defineInicio();
     if (f == 1) {
@@ -210,6 +285,7 @@ export class CurriculosComponent implements OnInit {
     }
     if (f == 3) {
       this.cb3 = this.btnSelected;
+      this.getExperiencia();
       this.show3 = true;
 
     }
@@ -283,7 +359,10 @@ export class CurriculosComponent implements OnInit {
     this.selectFase(1);
     this.curriculosService.getEscolaridades(res => {
       this.escolaridades = res.data.result;
-    })
+    });
+    this.curriculosService.getArea(res => {
+      this.atuacoes = res.data.result;
+    });
   }
 
 

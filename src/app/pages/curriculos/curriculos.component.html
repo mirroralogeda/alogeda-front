@@ -106,7 +106,7 @@
               <th style="text-align: left">Instituição de ensino</th>
               <th style="text-align: left">Curso</th>
               <th style="text-align: left">Grau de escolaridade</th>
-              <th style="text-align: left">Inicio</th>
+              <th style="text-align: left">Início</th>
               <th style="text-align: left">Fim</th>
             </tr>
           </thead>
@@ -125,15 +125,70 @@
     </div>
 
     <!-- experiencias -->
-    <div *ngIf="show3">
-      <div class="col-md-12">
-        <ba-card cardTitle="Experiências" baCardClass="with-scroll" class="smart-table-container">
-          <ng2-smart-table [settings]="settings4" [source]="source4" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
-          <button class="{{ btnSelected }} pull-right" (click)="selectFase(4, true)" style="margin-top: 10px">Guardar e prosseguir</button>
-        </ba-card>
-      </div>
-    </div>
 
+
+    <div class="col-md-12" *ngIf="show3">
+
+      <ba-card cardTitle="Experiências" baCardClass="with-scroll">
+        <form [formGroup]="formExperiencia" (ngSubmit)="onSubmitExperiencia()">
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label for="input01">Area de atuação</label>
+              <select formControlName="areasAtuacao" class="form-control">
+                <option></option>
+                <option *ngFor="let item of atuacoes" [value]="item.id">{{item.nome}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="input01">Cargo ocupado</label>
+              <input formControlName="cargoOcupado" type="text" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="input01">Data de início</label>
+              <input formControlName="dataInicio" type="date" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="input01">Data de término (opcional)</label>
+              <input formControlName="dataFim" type="date" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="input01">Breve descrição das atividades</label>
+              <input formControlName="observacoes" type="text" class="form-control required" placeholder="">
+            </div>
+            <div class="form-group col-md-12">
+              <div style="margin-top: 10px">
+                <button *ngIf="insertExperiencia" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Salvar</button>
+                <button *ngIf="!insertExperiencia" (click)="setNovoExperiencia()" class="btn btn-success pull-right" style="margin-left: 6px">Cancelar / Novo</button>
+                <button *ngIf="!insertExperiencia" type="submit" class="btn btn-warning pull-right" style="margin-left: 6px">Atualizar</button>
+                <button *ngIf="!insertExperiencia" (click)="onDeleteExperiencia(formExperiencia.value)" class="btn btn-danger pull-right" style="margin-left: 6px">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ba-card>
+
+      <ba-card cardTitle="" baCardClass="with-scroll table-panel">
+        <table class="table table-hover">
+          <thead>
+            <tr class="black-muted-bg">
+              <th style="text-align: left">Area de atuação</th>
+              <th style="text-align: left">Cargo ocupado</th>
+              <th style="text-align: left">Início</th>
+              <th style="text-align: left">Fim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of experiencias" class="no-top-border">
+              <td (click)="setExperiencia(item)" style="text-align: left">{{item.areasAtuacao.nome}}</td>
+              <td (click)="setExperiencia(item)" style="text-align: left">{{item.cargoOcupado}}</td>
+              <td (click)="setExperiencia(item)" style="text-align: left">{{item.dataInicio}}</td>
+              <td (click)="setExperiencia(item)" style="text-align: left">{{item.dataFim}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ba-card>
+
+    </div>
     <!-- conclusão -->
     <div class="col-md-12" *ngIf="show4">
 
