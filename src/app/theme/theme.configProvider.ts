@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
+import { Injectable } from "@angular/core";
+import * as _ from "lodash";
 
-import { colorHelper } from './theme.constants';
+import { colorHelper } from "./theme.constants";
 
 @Injectable()
 export class BaThemeConfigProvider {
-
   private basic: any;
   private colorScheme: any;
   private dashboardColors: any;
@@ -13,33 +12,33 @@ export class BaThemeConfigProvider {
 
   constructor() {
     this.basic = {
-      default: '#ffffff',
-      defaultText: '#ffffff',
-      border: '#dddddd',
-      borderDark: '#aaaaaa',
+      default: "#ffffff",
+      defaultText: "#ffffff",
+      border: "#dddddd",
+      borderDark: "#aaaaaa"
     };
 
     // main functional color scheme
     this.colorScheme = {
-      primary: '#00abff',
-      info: '#40daf1',
-      success: '#8bd22f',
-      warning: '#e7ba08',
-      danger: '#f95372',
+      primary: "#00abff",
+      info: "#40daf1",
+      success: "#8bd22f",
+      warning: "#e7ba08",
+      danger: "#f95372"
     };
 
     // dashboard colors for charts
     this.dashboardColors = {
-      blueStone: '#40daf1',
-      surfieGreen: '#00abff',
-      silverTree: '#1b70ef',
-      gossip: '#3c4eb9',
-      white: '#ffffff',
+      blueStone: "#40daf1",
+      surfieGreen: "#00abff",
+      silverTree: "#1b70ef",
+      gossip: "#3c4eb9",
+      white: "#ffffff"
     };
 
     this.conf = {
       theme: {
-        name: 'ng2',
+        name: "Alogeda"
       },
       colors: {
         default: this.basic.default,
@@ -70,12 +69,12 @@ export class BaThemeConfigProvider {
           surfieGreen: this.dashboardColors.surfieGreen,
           silverTree: this.dashboardColors.silverTree,
           gossip: this.dashboardColors.gossip,
-          white: this.dashboardColors.white,
+          white: this.dashboardColors.white
         },
 
         custom: {
           dashboardPieChart: colorHelper.hexToRgbA(this.basic.defaultText, 0.8),
-          dashboardLineChart: this.basic.defaultText,
+          dashboardLineChart: this.basic.defaultText
         }
       }
     };
