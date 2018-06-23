@@ -1,0 +1,127 @@
+<div class="widgets"  *ngIf="!ac">
+  <div class="row">
+    <div class="col-md-12">
+      <ba-card cardTitle="Filtros" class="modal-buttons">
+        <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+          <div class=row>
+            <div class="form-group col-md-3">
+              <label for="input01">Area de atuação</label>
+              <select formControlName="atuacao" class="form-control">
+                <option></option>
+                <option *ngFor="let item of atuacoes" [value]="item.id">{{item.nome}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="input01">Grau de escolaridade</label>
+              <select formControlName="escolaridade" class="form-control">
+                <option></option>
+                <option *ngFor="let item of escolaridades" [value]="item.id">{{item.grau}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="input01">Qtde. formações</label>
+              <input formControlName="formacoes" type="number" class="form-control required" placeholder="">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="input01">Qtde. experiências</label>
+              <input formControlName="experiencias" type="number" class="form-control required" placeholder="">
+            </div>
+
+
+            <div class="form-group col-md-2">
+              <button type="submit" class="btn btn-warning pull-right" style="margin-top: 25px">Buscar</button>
+            </div>
+          </div>
+        </form>
+      </ba-card>
+    </div>
+  </div>
+</div>
+
+
+<div class="widgets" *ngIf="!ac">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class=row>
+        <div class="col-md-12">
+          <ba-card cardTitle="Candidatos" baCardClass="with-scroll table-panel">
+            <table class="table table-hover">
+              <thead>
+                <tr class="black-muted-bg">
+                  <th style="text-align: left">Nome do candidato</th>
+                  <th style="text-align: left">Níveis de formação</th>
+                  <th style="text-align: left">Areas de atuação</th>
+                  <th style="text-align: left">Qtde. experiencias</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of curriculosFiltrados" class="no-top-border">
+                  <td (click)="setCurriculo(item)" style="text-align: left">{{item.pessoas.nome}}</td>
+                  <td (click)="setCurriculo(item)" style="text-align: left">{{ getNiveisFormacao(item.formacoeses) }}</td>
+                  <td (click)="setCurriculo(item)" style="text-align: left">{{ getAreasAtuacao(item.experienciases) }}</td>
+                  <td (click)="setCurriculo(item)" style="text-align: left">{{ getQuantidadeExperiencias(item.experienciases)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ba-card>
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="widgets" *ngIf="feitoo">
+  <div class="row">
+    <div class="col-md-12">
+      <ba-card cardTitle="Dados do candidato" class="modal-buttons">
+        <div>
+          <h3>Dados pessoais</h3>
+          <div class="row">
+            <div class="col-md-3">Nome: {{c.pessoas.nome}}</div>
+            <div class="col-md-3">CPF: {{c.pessoas.cpf}} </div>
+            <div class="col-md-3">RG:{{c.pessoas.rg}} </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">E-mail:{{c.pessoas.email}} </div>
+            <div class="col-md-3">Telefone:{{c.pessoas.telefone}} </div>
+          </div>
+
+          <h3 style="margin-top: 25px">Formações</h3>
+          <div class="row" *ngFor="let item of c.formacoeses">
+            <div class="col-md-6">Instituição de ensino: {{item.instituicaoEnsino}}</div>
+            <div class="col-md-6">Curso: {{item.nome}}</div>
+          </div>
+
+          <h3 style="margin-top: 25px">Experiências</h3>
+          <div class="row" *ngFor="let item of c.experienciases">
+            <div class="col-md-6">Area de atuação: {{item.areasAtuacao.nome}}</div>
+            <div class="col-md-6">Cargo: {{item.cargoOcupado}}</div>
+          </div>
+
+          <h3 style="margin-top: 25px">Informações adicionais</h3>
+          <div class="row">
+            <div class="col-md-8">{{c.descricao}} </div>
+
+          </div>
+
+
+          <div class="row" style="margin-top: 25px">
+            <button *ngIf="!insertExperiencia" (click)="abrirC()" class="btn btn-success" style="margin-left: 6px">Contratar</button>
+
+          </div>
+        </div>
+      </ba-card>
+    </div>
+  </div>
+</div>
+
+

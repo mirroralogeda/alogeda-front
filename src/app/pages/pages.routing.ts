@@ -25,6 +25,10 @@ export const routes: Routes = [
         path: "recrutamento/curriculos",
         loadChildren: "./curriculos/curriculos.module#CurriculosModule"
       },
+      {
+        path: "recrutamento/selecao",
+        loadChildren: "./selecao/selecao.module#SelecaoModule"
+      },
       // {
       //   path: "editors",
       //   loadChildren: "./editors/editors.module#EditorsModule"

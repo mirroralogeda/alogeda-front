@@ -82,8 +82,7 @@ export class CurriculosComponent implements OnInit {
   }
   setForm(callback) {
     this.curriculosService.getPessoaCpf(this.formPessoa.value.cpf, res => {
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(res.data);
+
       if (res.data.result) {
         this.data.pessoas.id = res.data.result.id;
         this.data.pessoas.cpf = res.data.result.cpf;
@@ -97,8 +96,7 @@ export class CurriculosComponent implements OnInit {
           this.data.id = res.data.result.curriculoses[0].id;
         else {
           this.curriculosService.getCurriculo(this.data.pessoas.id, res2 => {
-            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbb");
-            console.log(res2.data);
+
             this.data.id = res2.data.result[0].id;
             if (res2.data.result[0].descricao)
               this.formConclusao.setValue({ descricao: res2.data.result[0].descricao });

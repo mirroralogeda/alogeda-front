@@ -58,6 +58,14 @@ export const PAGES_MENU = [
               }
             }
           },
+          {
+            path: "selecao",
+            data: {
+              menu: {
+                title: "general.menu.selecao"
+              }
+            }
+          },
         ]
       },
 
