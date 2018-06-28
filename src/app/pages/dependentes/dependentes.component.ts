@@ -202,7 +202,7 @@ export class DependentesComponent implements OnInit {
       },
       
       nome: {
-        title: 'Nome do Funcionário.',
+        title: 'Nome',
         type: 'string'
       },
       impostoRenda: {
@@ -235,6 +235,11 @@ export class DependentesComponent implements OnInit {
           component: CheckboxEditorComponent,
         }
       },
+      observacao: {
+        title: 'Obs',
+        type: 'string'
+      },
+
     }
   };
   sourceTable: LocalDataSource = new LocalDataSource();

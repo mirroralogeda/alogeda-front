@@ -65,6 +65,11 @@ export class FuncionariosEdicaoComponent implements OnInit {
     }
     return dataServidor.substr(6, 4) + "-" + dataServidor.substr(3, 2) + "-" + dataServidor.substr(0, 2);
   }
+  onChangePessoa(pessoaId) {
+    var pessoaEncontrada = this.pessoas.filter(x => x.id == pessoaId)[0]
+    console.log("pessoaEncontrada", pessoaEncontrada)
+    // this.form.controls['cpf'].setValue(pessoaEncontrada.cpf);
+  }
   ngOnInit(): void {
     this.hostService.defaultGet("pessoas/getall", null, (dados) => {
       this.pessoas = dados.data.result
@@ -142,7 +147,7 @@ export class FuncionariosEdicaoComponent implements OnInit {
 
 function ChecaPIS(pis) {
   pis = pis.toString()
-console.log("ChecaPis",pis)
+  console.log("ChecaPis", pis)
   var ftap = "3298765432";
   var total = 0;
   var i = 0;
