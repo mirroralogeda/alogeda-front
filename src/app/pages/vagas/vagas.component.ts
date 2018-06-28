@@ -51,7 +51,7 @@ export class VagasComponent implements OnInit {
   }
   
   public onSubmit(values: Object): void {
-    let data = this.form.value;
+    let data = {...this.form.value};
     if (this.form.value.cargos != null) {
       data.dataInicio = this.dataParaServidor(data.dataInicio);
       data.dataFim = this.dataParaServidor(data.dataFim);

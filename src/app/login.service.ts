@@ -41,7 +41,7 @@ export class LoginService {
       this.router.navigateByUrl("/login");
     } else if (this.router.url === "/login") {
       console.log("loado");
-      this.router.navigateByUrl("/pages");
+      this.router.navigateByUrl("/pages/dashboard");
     }
   }
   public logout() {

@@ -19,6 +19,7 @@ export class FuncionariosEdicaoComponent implements OnInit {
     id: new FormControl(),
     dataAdmissao: ['', Validators.required],
     pessoas: ['', Validators.required],
+    cargos: ['', Validators.required],
     nomePai: ['', Validators.required],
     nomeMae: ['', Validators.required],
     pis: ['', Validators.required],
@@ -48,6 +49,8 @@ export class FuncionariosEdicaoComponent implements OnInit {
   }
   pessoas = []
 
+  cargos = []
+
   private sub: any;
   private id;
   dataParaServidor(dataCliente) {
@@ -66,6 +69,9 @@ export class FuncionariosEdicaoComponent implements OnInit {
     this.hostService.defaultGet("pessoas/getall", null, (dados) => {
       this.pessoas = dados.data.result
     })
+    this.hostService.defaultGet("cargos/getall", null, (dados) => {
+      this.cargos = dados.data.result
+    })
 
     //buscar quando edita
     this.sub = this.route.params.subscribe(params => {
@@ -74,13 +80,15 @@ export class FuncionariosEdicaoComponent implements OnInit {
         this.hostService.defaultGet("funcionarios/BuscaPorId", { entidadeId: this.id }, (dados) => {
           const dadosFormulario = dados.data.result
           dadosFormulario.pessoas = dadosFormulario.pessoas.id
+          if (dadosFormulario.cargos)
+            dadosFormulario.cargos = dadosFormulario.cargos.id
           dadosFormulario.dataEmissaoPis = this.dataParaCliente(dadosFormulario.dataEmissaoPis)
           dadosFormulario.dataDemissao = this.dataParaCliente(dadosFormulario.dataDemissao)
           dadosFormulario.dataEmissaoCarteiraTrabalho = this.dataParaCliente(dadosFormulario.dataEmissaoCarteiraTrabalho)
           dadosFormulario.dataEmissaoCnh = this.dataParaCliente(dadosFormulario.dataEmissaoCnh)
           dadosFormulario.dataPrimeiraCnh = this.dataParaCliente(dadosFormulario.dataPrimeiraCnh)
           dadosFormulario.dataValidadeCnh = this.dataParaCliente(dadosFormulario.dataValidadeCnh)
-      
+
           this.form.setValue(dadosFormulario);
 
         })
@@ -97,26 +105,79 @@ export class FuncionariosEdicaoComponent implements OnInit {
       alert("Informe todos campos")
       return
     }
+
     const dadosFormulario = { ...this.form.value }
-    dadosFormulario.pessoas = { id: dadosFormulario.pessoas }
-    dadosFormulario.dataAdmissao = this.dataParaServidor(dadosFormulario.dataAdmissao)
-    dadosFormulario.dataEmissaoPis = this.dataParaServidor(dadosFormulario.dataEmissaoPis)
-    dadosFormulario.dataDemissao = this.dataParaServidor(dadosFormulario.dataDemissao)
-    dadosFormulario.dataEmissaoCarteiraTrabalho = this.dataParaServidor(dadosFormulario.dataEmissaoCarteiraTrabalho)
-    dadosFormulario.dataEmissaoCnh = this.dataParaServidor(dadosFormulario.dataEmissaoCnh)
-    dadosFormulario.dataPrimeiraCnh = this.dataParaServidor(dadosFormulario.dataPrimeiraCnh)
-    dadosFormulario.dataValidadeCnh = this.dataParaServidor(dadosFormulario.dataValidadeCnh)
+    if (ChecaPIS(dadosFormulario.pis)) {
+      dadosFormulario.pessoas = { id: dadosFormulario.pessoas }
+      dadosFormulario.cargos = { id: dadosFormulario.cargos }
+      dadosFormulario.dataAdmissao = this.dataParaServidor(dadosFormulario.dataAdmissao)
+      dadosFormulario.dataEmissaoPis = this.dataParaServidor(dadosFormulario.dataEmissaoPis)
+      dadosFormulario.dataDemissao = this.dataParaServidor(dadosFormulario.dataDemissao)
+      dadosFormulario.dataEmissaoCarteiraTrabalho = this.dataParaServidor(dadosFormulario.dataEmissaoCarteiraTrabalho)
+      dadosFormulario.dataEmissaoCnh = this.dataParaServidor(dadosFormulario.dataEmissaoCnh)
+      dadosFormulario.dataPrimeiraCnh = this.dataParaServidor(dadosFormulario.dataPrimeiraCnh)
+      dadosFormulario.dataValidadeCnh = this.dataParaServidor(dadosFormulario.dataValidadeCnh)
 
-    console.log("FORM", dadosFormulario)
-    this.hostService.defaultPost("funcionarios/save", dadosFormulario, ret => {
-      if (ret.status === 200) {
-        this.router.navigate(["pages/cargos/funcionarios"])
+      console.log("FORM", dadosFormulario)
+      this.hostService.defaultPost("funcionarios/save", dadosFormulario, ret => {
+        if (ret.status === 200) {
+          this.router.navigate(["pages/cargos/funcionarios"])
 
-        this.form.reset();
-      }
-    });
+          this.form.reset();
+        }
+      });
+
+
+
+    } else {
+      alert("PIS inválido")
+    }
+
   }
 
 
   constructor(private FuncionarioService: FuncionarioService, private hostService: HostService, private router: Router, private route: ActivatedRoute) { }
+}
+
+
+function ChecaPIS(pis) {
+  pis = pis.toString()
+console.log("ChecaPis",pis)
+  var ftap = "3298765432";
+  var total = 0;
+  var i = 0;
+  var resto = 0;
+  var numPIS = "";
+  var strResto = "";
+  total = 0;
+  strResto = "";
+  var resultado = 0
+
+  numPIS = pis;
+
+  if (numPIS == "" || numPIS == null) {
+    return false;
+  }
+
+  for (i = 0; i <= 9; i++) {
+    resultado = parseInt(numPIS.slice(i, i + 1)) * parseInt(ftap.slice(i, i + 1));
+    total = total + resultado;
+  }
+
+  resto = (total % 11)
+
+  if (resto != 0) {
+    resto = 11 - resto;
+  }
+
+  if (resto == 10 || resto == 11) {
+    strResto = resto + "";
+    resto = parseInt(strResto.slice(1, 2));
+  }
+
+  if (resto !== +(numPIS.slice(10, 11))) {
+    return false;
+  }
+
+  return true;
 }
