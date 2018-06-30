@@ -40,9 +40,9 @@ export class TabInssService {
 
   salva(tab: TabInss): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.hostService.defaultPost("tabinss/save", tab.faixas.map(f => { return { id: f.id, perInicial: tab.perInicial, perFinal: tab.perFinal, valInicial: f.valInicial, valFinal: f.valFinal, percentual: f.percentual, deducao: f.deducao } }), e => {
-        resolve();
-      })
+  //     this.hostService.defaultPost("tabinss/save", tab.faixas.map(f => { return { id: f.id, perInicial: tab.perInicial, perFinal: tab.perFinal, valInicial: f.valInicial, valFinal: f.valFinal, percentual: f.percentual, deducao: f.deducao } }), e => {
+  //       resolve();
+  //     })
     });
   }
 
