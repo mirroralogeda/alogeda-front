@@ -196,14 +196,14 @@
       <ba-card cardTitle="Conclusão" baCardClass="with-scroll">
         <form [formGroup]="formConclusao" (ngSubmit)="concluirCurriculo()">
           <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label for="input01">Informações adicionais (opcional)</label>
               <textarea formControlName="descricao" placeholder="" class="form-control" id="textarea01"></textarea>
             </div>
-            <!-- <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
               <label for="input01">Anexar arquivo .pdf (opcional)</label>
-              <ba-file-uploader [fileUploaderOptions]="fileUploaderOptions"></ba-file-uploader>
-            </div> -->
+              <ba-file-uploader (change)="onFileChange($event)"></ba-file-uploader>
+            </div>
           </div>
           <button class="{{ btnSelected }} pull-right" type="submit">Concluir</button>
         </form>

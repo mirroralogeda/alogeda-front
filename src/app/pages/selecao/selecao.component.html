@@ -1,4 +1,4 @@
-<div class="widgets"  *ngIf="!ac">
+<div class="widgets" *ngIf="!ac">
   <div class="row">
     <div class="col-md-12">
       <ba-card cardTitle="Filtros" class="modal-buttons">
@@ -109,7 +109,10 @@
 
           <h3 style="margin-top: 25px">Informações adicionais</h3>
           <div class="row">
-            <div class="col-md-8">{{c.descricao}} </div>
+            <div class="col-md-6">{{c.descricao}} </div>
+            <div class="col-md-6">
+              <button (click)="getPdf(c.pdf)" class="btn btn-warning" style="margin-left: 6px">Ver curriculo.pdf</button>
+            </div>
 
           </div>
 
@@ -123,5 +126,3 @@
     </div>
   </div>
 </div>
-
-

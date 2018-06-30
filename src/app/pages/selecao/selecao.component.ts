@@ -127,6 +127,11 @@ export class SelecaoComponent implements OnInit {
     else
       return 0;
   }
+  getPdf(base64) {
+    console.log(base64);
+    var dataURI = "data:application/pdf;base64," + base64;
+    window.open(dataURI, '_blank');
+  }
 
 
   ngOnInit() {

@@ -43,7 +43,8 @@ export class CurriculosComponent implements OnInit {
   concluido = false;
 
   formConclusao = new FormBuilder().group({
-    descricao: new FormControl()
+    descricao: new FormControl(),
+    file: new FormControl()
   });
 
   formPessoa = new FormBuilder().group({
@@ -117,13 +118,28 @@ export class CurriculosComponent implements OnInit {
     this.concluido = false;
   }
 
+  onFileChange(event) {
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.formConclusao.get('file').setValue(reader.result.split(',')[1])
+      };
+    }
+  }
+
+
   concluirCurriculo(content) {
+    console.log('concluido....');
+    console.log(this.formConclusao.value);
     let data = {
       id: this.data.id,
       pessoas: {
         id: this.data.pessoas.id
       },
-      descricao: this.formConclusao.value.descricao
+      descricao: this.formConclusao.value.descricao,
+      pdf: this.formConclusao.value.file
     }
     this.curriculosService.saveCurriculo(data, res => {
       console.log(res);
