@@ -119,7 +119,15 @@ export const PAGES_MENU = [
           }
         },
         children: [
-          {
+            {
+              path: "tab-inss",
+              data: {
+                menu: {
+                  title: "general.menu.tab_inss"
+                }
+              }
+            },
+            {
             path: "tab-irrf",
             data: {
               menu: {

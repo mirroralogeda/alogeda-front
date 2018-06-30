@@ -27,13 +27,13 @@
                   <tbody *ngIf="tabSelecionada">
                     <tr *ngFor="let faixa of tabSelecionada?.faixas; let i = index" class="no-top-border">
                       <td>
-                        <input type="text" class="form-control" required [(ngModel)]="faixa.valInicial" name="val{{faixa.valInicial}}">
+                        <input type="number" min="0" step="any" class="form-control" required [(ngModel)]="faixa.valInicial" name="val{{faixa.valInicial}}">
                       </td>
                       <td>
-                        <input type="text" class="form-control" required [(ngModel)]="faixa.valFinal" name="val{{faixa.valFinal}}">
+                        <input type="number" min="0" step="any" class="form-control" required [(ngModel)]="faixa.valFinal" name="val{{faixa.valFinal}}">
                       </td>
                       <td>
-                        <input type="text" class="form-control" required [(ngModel)]="faixa.valor" name="val{{faixa.valor}}">
+                        <input type="number" min="0" step="any" class="form-control" required [(ngModel)]="faixa.valor" name="val{{faixa.valor}}">
                       </td>
                       <td>
                         <button type="button" (click)="removeLinha(i)" class="btn">X</button>

@@ -75,6 +75,11 @@ export const routes: Routes = [
         loadChildren: "./salarios/salarios.module#SalariosModule"
       },
       {
+        path: "cadastros/tab-inss",
+        loadChildren:
+          "./tab-inss/tab-inss.module#TabInssModule"
+      },
+      {
         path: "cadastros/atestados",
         loadChildren: "./atestados/atestados.module#AtestadosModule"
       },
