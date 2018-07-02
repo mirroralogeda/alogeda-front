@@ -31,8 +31,9 @@
 
       <div *ngIf="folhas">
         <button (click)="voltar()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Voltar</button>
+        <button (click)="imprimir()" class="btn btn-success pull-right col-md-1 col-sm-1" style="margin-left: 6px">Imprimir</button>
         <ba-card cardTitle="" baCardClass="with-scroll table-panel">
-          <div *ngFor="let f of folhas">
+          <div *ngFor="let f of folhas" id="folhas-geradas">
             <h2>{{f.nome}}</h2>
             <table class="table table-hover">
               <thead>

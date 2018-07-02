@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Calculo, FolhaFuncionario } from "./folha.model";
 import { FolhaService } from "./folha.service";
 import { HostService } from "../../host.service";
-import { FormsModule } from '@angular/forms';
-import { Jsonp } from '@angular/http';
-import { CurrencyPipe } from '@angular/common';
+import { FormsModule } from "@angular/forms";
+import { Jsonp } from "@angular/http";
+import { CurrencyPipe } from "@angular/common";
 
 @Component({
-  selector: 'folha',
-  templateUrl: './folha.component.html',
-  styleUrls: ['./folha.component.scss'],
+  selector: "folha",
+  templateUrl: "./folha.component.html",
+  styleUrls: ["./folha.component.scss"]
 })
 export class FolhaComponent implements OnInit {
   calculos: Calculo[];
   folhas: FolhaFuncionario[];
 
-  constructor(private activeModal: NgbModal,
+  constructor(
+    private activeModal: NgbModal,
     private service: FolhaService,
-    modalService: NgbModal) {
-  }
+    modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.loadData();
@@ -28,7 +29,6 @@ export class FolhaComponent implements OnInit {
   async loadData() {
     this.calculos = await this.service.getCalculos();
   }
-
 
   parseDate(dateString: string): String {
     if (dateString)
@@ -62,5 +62,17 @@ export class FolhaComponent implements OnInit {
     this.folhas = null;
   }
 
+  imprimir() {
+    const eleFolhas = document.getElementById("folhas-geradas");
+    const HTML = `
+      <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+      </head>
+      <body>
+        ${eleFolhas.outerHTML}
+      </body>
+    `;
+    const win = window.open("", "Folhas");
+    win.document.body.innerHTML = HTML;
+  }
 }
-
